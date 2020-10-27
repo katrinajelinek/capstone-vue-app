@@ -17,7 +17,7 @@
         </button>
       </div> 
       <div v-if="$parent.getUserId() == post.user_id">
-        <button>
+        <button v-on:click="destroyPost()">
           Delete
         </button>
       </div> 
@@ -113,7 +113,12 @@ export default {
         this.tags = response.data.tags;
       });
     },
-    // deletePost: function () {},
+    destroyPost: function () {
+      axios.delete(`/api/posts/${this.post.id}`).then(response => {
+        console.log("Success", response.data);
+        this.$router.push("/posts");
+      });
+    },
     createOffer: function() {
       var params = {
         message: this.message,
@@ -129,22 +134,27 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    updateOffer: function (offer) {
-      var params = {
-        message: this.offer.message,
-        image_url: this.offer.imageUrl,
-        post_id: this.post.id,
-      };
-      axios
-        .patch(`/api/offers/${this.offer.id}`, params)
-        .then((response) => {
-          this.$router.push(`/posts/${this.post.id}`);
-        })
-        .catch(error => {
-          this.errors = error.response.data.errors;
-        });
-    },
-    // deleteOffer: function () {}
+    // updateOffer: function (offer) {
+    //   var params = {
+    //     message: this.offer.message,
+    //     image_url: this.offer.imageUrl,
+    //     post_id: this.post.id,
+    //   };
+    //   axios
+    //     .patch(`/api/offers/${this.offer.id}`, params)
+    //     .then((response) => {
+    //       this.$router.push(`/posts/${this.post.id}`);
+    //     })
+    //     .catch(error => {
+    //       this.errors = error.response.data.errors;
+    //     });
+    // },
+    // destroyOffer: function () {
+    //   axios.delete(`/api/posts/${this.offer.id}`).then(response => {
+    //     console.log("Success", response.data);
+    //     this.$router.push("/posts");
+    //   });
+    // }
   },
 };
 </script>
