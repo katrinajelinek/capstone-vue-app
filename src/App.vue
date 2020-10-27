@@ -4,6 +4,7 @@
       <!-- <router-link to="/">Home</router-link> | -->
       <!-- <router-link to="/about">About</router-link> | -->
       <router-link to="/posts">Clippings</router-link> |
+      <router-link to="/posts/new"> New Clipping</router-link> |
       <router-link to="/signup" v-if="!isLoggedIn()">Signup</router-link> |
       <router-link to="/login" v-if="!isLoggedIn()">Login</router-link> |
       <router-link to="/logout" v-if="isLoggedIn()">Logout</router-link>
