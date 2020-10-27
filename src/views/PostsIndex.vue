@@ -2,7 +2,9 @@
   <div class="posts-index">
     <div v-for="post in posts">
       <h2>{{post.plant_type}}</h2>
-      <img :src="post.image_url" alt="">
+      <router-link :to="`/posts/${post.id}`">
+        <img :src="post.image_url" alt="">
+      </router-link>
       <h3>Trade for: {{post.trade_for}}</h3>
       <p>Description: {{post.description}}</p>
       <p>Loaction: {{post.location}}</p>
