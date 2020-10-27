@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/signup">Signup</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/logout">Logout</router-link>
+      <!-- <router-link to="/">Home</router-link> | -->
+      <!-- <router-link to="/about">About</router-link> | -->
+      <router-link to="/posts">Clippings</router-link> |
+      <router-link to="/signup" v-if="!isLoggedIn()">Signup</router-link> |
+      <router-link to="/login" v-if="!isLoggedIn()">Login</router-link> |
+      <router-link to="/logout" v-if="isLoggedIn()">Logout</router-link>
     </div>
     <router-view/>
   </div>
@@ -33,3 +34,19 @@
   color: #42b983;
 }
 </style>
+
+<script>
+import axios from "axios";
+
+export default {
+  data: function() {
+    return {
+    };
+  },
+  methods: {
+    isLoggedIn: function () {
+      return localStorage.getItem("jwt");
+    }
+  }
+};
+</script>
