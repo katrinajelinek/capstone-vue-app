@@ -14,6 +14,9 @@
         <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
         <p>Message: {{offer.message}}</p>
         <img :src="offer.image_url" alt="">
+        <div v-if="$parent.getUserId() == offer.user.id">
+          <!-- <button v-on:click="">Edit</button> -->
+        </div>
       </div>
 
 <!-- offers new -->
@@ -31,6 +34,23 @@
         <input type="text" class="form-control" v-model="imageUrl">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+
+<!-- offers upate -->
+    <form v-on:submit.prevent="updateOffer()">
+      <h2>Update Offer:</h2>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Message:</label> 
+        <input type="text" class="form-control" v-model="offer.message">
+      </div>
+      <div>
+        <label>Image:</label> 
+        <input type="text" class="form-control" v-model="offer.imageUrl">
+      </div>
+      <input type="submit" class="btn btn-primary" value="Update">
     </form>
   </div>
 </template>
@@ -50,6 +70,7 @@ export default {
       message: "",
       imageUrl: "",
       post_id: "",
+      offer: {},
     };
   },
   created: function() {
@@ -85,7 +106,7 @@ export default {
         post_id: this.post.id,
       };
       axios
-        .patch("/api/offers", params)
+        .patch(`/api/offers/${this.offer.id}`, params)
         .then((response) => {
           this.$router.push(`/posts/${this.post.id}`);
         })
