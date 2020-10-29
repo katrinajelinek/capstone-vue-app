@@ -14,11 +14,6 @@
     <div v-if="$parent.getUserId() == post.user_id">
       <router-link :to="`/posts/${post.id}/edit`">Edit</router-link>
     </div> 
-    <div v-if="$parent.getUserId() == post.user_id">
-      <button v-on:click="destroyPost()">
-        Delete
-      </button>
-    </div> 
       
 
 <!-- offers index -->
@@ -147,7 +142,7 @@ export default {
         });
     },
     destroyOffer: function () {
-      axios.delete(`/api/posts/${this.offer.id}`).then(response => {
+      axios.delete(`/api/offers/${this.offer.id}`).then(response => {
         console.log("Success", response.data);
         this.$router.push("/posts");
       });

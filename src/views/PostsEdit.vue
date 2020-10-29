@@ -27,6 +27,9 @@
       </div>
       <input type="submit" class="btn btn-primary" value="Update">
     </form>
+    <button v-on:click="destroyPost()">
+        Delete
+      </button>
     <div v-for="tag in tags">
       <p>{{tag.name}}</p>
     </div>
@@ -72,6 +75,12 @@ export default {
       axios.get("/api/tags").then(response => {
         console.log(response.data);
         this.tags = response.data;
+      });
+    },
+    destroyPost: function () {
+      axios.delete(`/api/posts/${this.post.id}`).then(response => {
+        console.log("Success", response.data);
+        this.$router.push("/posts");
       });
     }
   }
