@@ -12,9 +12,7 @@
     </div>
     <p>Created at: {{post.created_at}}</p>
     <div v-if="$parent.getUserId() == post.user_id">
-      <button v-on:click="postEditToggle = !postEditToggle">
-        Edit
-      </button>
+      <router-link :to="`/posts/${post.id}/edit`">Edit</router-link>
     </div> 
     <div v-if="$parent.getUserId() == post.user_id">
       <button v-on:click="destroyPost()">
@@ -97,7 +95,6 @@ export default {
       post_id: "",
       offer: {},
       offerEditToggle: false,
-      postEditToggle: false,
       tags: [],
     };
   },
