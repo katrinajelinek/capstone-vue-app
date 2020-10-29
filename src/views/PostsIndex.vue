@@ -1,9 +1,14 @@
 <template>
   <div class="posts-index">
+
+    <router-link :to="`/posts/new`">
+      Post a clipping
+    </router-link>
+
     <div v-for="post in posts">
-      <h2>{{post.plant_type}}</h2>
+      <img :src="post.image_url" alt="">
       <router-link :to="`/posts/${post.id}`">
-        <img :src="post.image_url" alt="">
+        <h2>{{post.plant_type}}</h2>
       </router-link>
       <h3>Trade for: {{post.trade_for}}</h3>
       <p>Description: {{post.description}}</p>
@@ -22,6 +27,7 @@ export default {
   data: function() {
     return {
       posts: [],
+      sortAttribute: "created_at"
     };
   },
   created: function() {
@@ -33,7 +39,10 @@ export default {
         console.log(response.data);
         this.posts = response.data;
       });
-    }
+    },
+    setSortAttribute: function (attribute) {
+      this.sortAttribute = attribute;
+    },
   },
 };
 </script>
