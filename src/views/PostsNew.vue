@@ -27,16 +27,25 @@
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
-    <div v-for="tag in tags">
-      <p>{{tag.name}}</p>
+
+    <div>
+      <label class="typo__label">Select Tags</label>
+      <multiselect v-model="value" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+        <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} tags selected</span></template>
+      </multiselect>
+      <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Multiselect from "vue-multiselect";
 
 export default {
+  components: {
+    Multiselect
+  },
   data: function() {
     return {
       plantType: "",
@@ -45,7 +54,9 @@ export default {
       location: "",
       imageUrl: "",
       errors: [],
-      tags: []
+      value: [],
+      tags: [],
+      tagIds: []
     };
   },
   created: function() {
@@ -58,7 +69,8 @@ export default {
         trade_for: this.tradeFor,
         description: this.description,
         location: this.location,
-        image_url: this.imageUrl
+        image_url: this.imageUrl,
+        tag_ids: this.tagIds,
       };
       axios
         .post("/api/posts", params)
@@ -74,7 +86,9 @@ export default {
         console.log(response.data);
         this.tags = response.data;
       });
-    }
+    },
   }
 };
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

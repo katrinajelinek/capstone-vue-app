@@ -88,7 +88,7 @@ export default {
       message: "",
       imageUrl: "",
       post_id: "",
-      offer: {},
+      selectedOffer: {},
       offerEditToggle: false,
       tags: [],
     };
@@ -126,27 +126,30 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    updateOffer: function (offer) {
-      var params = {
-        message: offer.message,
-        image_url: offer.imageUrl,
-        post_id: this.post.id,
-      };
-      axios
-        .patch(`/api/offers/${this.offer.id}`, params)
-        .then((response) => {
-          this.$router.push(`/posts/${this.post.id}`);
-        })
-        .catch(error => {
-          this.errors = error.response.data.errors;
-        });
-    },
-    destroyOffer: function () {
-      axios.delete(`/api/offers/${this.offer.id}`).then(response => {
-        console.log("Success", response.data);
-        this.$router.push("/posts");
-      });
-    }
+    // updateOffer: function (offer) {
+    //   var params = {
+    //     message: offer.message,
+    //     image_url: offer.imageUrl,
+    //     post_id: this.post.id,
+    //   };
+    //   axios
+    //     .patch(`/api/offers/${this.offer.id}`, params)
+    //     .then((response) => {
+    //       this.$router.push(`/posts/${this.post.id}`);
+    //     })
+    //     .catch(error => {
+    //       this.errors = error.response.data.errors;
+    //     });
+    // },
+    // destroyOffer: function () {
+    //   axios.delete(`/api/offers/${this.offer.id}`).then(response => {
+    //     console.log("Success", response.data);
+    //     this.$router.push("/posts");
+    //   });
+    // },
+    // selectOffer: function(offer) {
+    //   this.selectedOffer = offer;
+    // }
   },
 };
 </script>

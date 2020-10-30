@@ -10,7 +10,8 @@
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
       </router-link>
-      <h3>Trade for: {{post.trade_for}}</h3>
+      <h3>Clipped by: {{post.user.first_name}} {{post.user.last_name}}</h3>
+      <p>Trade for: {{post.trade_for}}</p>
       <p>Description: {{post.description}}</p>
       <p>Loaction: {{post.location}}</p>
       <p>Created at: {{post.created_at}}</p> <br> <br>
@@ -27,7 +28,7 @@ export default {
   data: function() {
     return {
       posts: [],
-      sortAttribute: "created_at"
+      sortAttribute: "created_at",
     };
   },
   created: function() {
