@@ -50,11 +50,6 @@ export default {
   },
   data: function() {
     return {
-      plantType: "",
-      tradeFor: "",
-      description: "",
-      location: "",
-      imageUrl: "",
       post: {},
       errors: [],
       tags: [],
@@ -74,11 +69,11 @@ export default {
     },
     updatePost: function() {
       var params = {
-        plant_type: this.post.plantType,
-        trade_for: this.post.tradeFor,
+        plant_type: this.post.plant_type,
+        trade_for: this.post.trade_for,
         description: this.post.description,
         location: this.post.location,
-        image_url: this.post.imageUrl
+        image_url: this.post.image_url
       };
       axios
         .patch(`/api/posts/${this.post.id}`, params)
