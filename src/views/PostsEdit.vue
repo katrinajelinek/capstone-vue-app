@@ -30,9 +30,6 @@
     <button v-on:click="destroyPost()">
       Delete
     </button>
-    <div v-for="tag in tags">
-      <p>{{tag.name}}</p>
-    </div>
     <div>
       <label class="typo__label">Select Tags</label>
       <multiselect v-model="values" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
@@ -40,7 +37,6 @@
       </multiselect>
       <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
     </div>
-    {{tags}}
   </div>
 </template>
 
@@ -66,12 +62,16 @@ export default {
     };
   },
   created: function() {
-    axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
-      console.log(response.data);
-      this.post = response.data;
-    });
+    this.showPost();
+    this.indexTags();
   },
   methods: {
+    showPost: function () {
+      axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
+        console.log(response.data);
+        this.post = response.data;
+      });
+    },
     updatePost: function() {
       var params = {
         plant_type: this.post.plantType,
