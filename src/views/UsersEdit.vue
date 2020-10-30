@@ -39,6 +39,11 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      imageUrl: "",
       user: {},
       errors: [],
     };
@@ -52,11 +57,11 @@ export default {
   methods: {
     updateUser: function() {
       var params = {
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
+        first_name: this.user.firstName,
+        last_name: this.user.lastName,
         email: this.user.email,
         password: this.user.password,
-        image_url: this.user.image_url
+        image_url: this.user.imageUrl
       };
       axios
         .patch(`/api/users/${this.user.id}`, params)
