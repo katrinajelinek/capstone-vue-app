@@ -23,13 +23,13 @@
       </div>
       <div class="form-group">
         <label>Image:</label> 
-        <input type="text" class="form-control" v-model="post.imageUrl">
+        <input type="text" class="form-control" v-model="post.image_url">
       </div>
       <input type="submit" class="btn btn-primary" value="Update">
     </form>
     <button v-on:click="destroyPost()">
-        Delete
-      </button>
+      Delete
+    </button>
     <div v-for="tag in tags">
       <p>{{tag.name}}</p>
     </div>
@@ -60,7 +60,7 @@ export default {
         trade_for: this.post.trade_for,
         description: this.post.description,
         location: this.post.location,
-        image_url: this.post.imageUrl
+        image_url: this.post.image_url
       };
       axios
         .patch(`/api/posts/${this.post.id}`, params)
