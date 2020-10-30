@@ -27,7 +27,9 @@
 <!-- offers index -->
     <h2>Offers</h2>
     <div v-for="offer in user.offers">
-      <h3>Posted on: {{offer.post_title}}</h3>
+      <router-link :to="`/posts/${offer.post_id}`">
+        <h3>Posted on: {{offer.post_title}}</h3>
+      </router-link>
       <p>Message: {{offer.message}}</p>
       <img :src="offer.image_url" alt="">
       <div v-if="$parent.getUserId() == offer.user_id">
