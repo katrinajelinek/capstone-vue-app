@@ -3,6 +3,9 @@
     <img :src="user.image_url" alt="">
     <h3>{{user.first_name}} {{user.last_name}}</h3>
     <div v-if="$parent.getUserId() == user.id">
+        <router-link :to="`/users/${user.id}/edit`">Edit Profile</router-link>
+    </div>
+    <div v-if="$parent.getUserId() == user.id">
         <router-link to="/posts/new">Post a clipping</router-link>
     </div>
 
