@@ -4,11 +4,12 @@ import Home from '../views/Home.vue';
 import Signup from '../views/Signup.vue';
 import Login from '../views/Login.vue';
 import Logout from '../views/Logout.vue';
+import UsersShow from '../views/UsersShow.vue';
+import UsersEdit from '../views/UsersEdit.vue';
 import PostsIndex from '../views/PostsIndex.vue';
 import PostsNew from '../views/PostsNew.vue';
 import PostsShow from '../views/PostsShow.vue';
 import PostsEdit from '../views/PostsEdit.vue';
-import UsersShow from '../views/UsersShow.vue';
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,16 @@ const routes = [
     component: Logout
   },
   {
+    path: '/users/:id',
+    name: 'users-show',
+    component: UsersShow
+  },
+  {
+    path: '/users/:id/edit',
+    name: 'users-edit',
+    component: UsersEdit
+  },
+  {
     path: '/posts',
     name: 'posts-index',
     component: PostsIndex
@@ -60,11 +71,6 @@ const routes = [
     path: '/posts/:id/edit',
     name: 'posts-edit',
     component: PostsEdit
-  },
-  {
-    path: '/users/:id',
-    name: 'users-show',
-    component: UsersShow
   },
 ];
 
