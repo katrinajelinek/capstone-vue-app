@@ -1,6 +1,12 @@
 <template>
   <div class="posts-index">
-    
+    <div>
+      <label class="typo__label">Select Tags</label>
+      <multiselect v-model="values" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+        <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} tags selected</span></template>
+      </multiselect>
+      <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
+    </div>
 
     <router-link :to="`/posts/new`">
       Post a clipping
@@ -27,19 +33,26 @@
 
 <script>
 import axios from "axios";
+import Multiselect from "vue-multiselect";
 
 export default {
+  components: {
+    Multiselect
+  },
   data: function() {
     return {
       posts: [],
       sortAttribute: "created_at",
+      values: [],
+      tags: [],
     };
   },
   created: function() {
-    this.postsIndex();
+    this.indexPosts();
+    this.indexTags();
   },
   methods: {
-    postsIndex: function () {
+    indexPosts: function () {
       axios.get("/api/posts").then(response => {
         console.log(response.data);
         this.posts = response.data;
@@ -47,6 +60,12 @@ export default {
     },
     setSortAttribute: function (attribute) {
       this.sortAttribute = attribute;
+    },
+    indexTags: function () {
+      axios.get("/api/tags").then(response => {
+        console.log(response.data);
+        this.tags = response.data;
+      });
     },
   },
 };
