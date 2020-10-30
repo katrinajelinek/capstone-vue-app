@@ -2,7 +2,10 @@
   <div class="posts-show">
     <img :src="post.image_url" alt="">
     <h1>{{post.plant_type}}</h1>
-    <h3>Clipped by: {{post.user.first_name}} {{post.user.last_name}}</h3>
+    <h3>Clipped by:</h3>
+    <router-link :to="`/users/${post.user_id}`">
+      <h3>{{post.user.first_name}} {{post.user.last_name}}</h3>
+    </router-link>
     <h2>Trade for: {{post.trade_for}}</h2>
     <p>Description: {{post.description}}</p>
     <p>Loaction: {{post.location}}</p>

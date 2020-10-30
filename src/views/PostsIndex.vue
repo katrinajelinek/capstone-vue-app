@@ -1,5 +1,6 @@
 <template>
   <div class="posts-index">
+    
 
     <router-link :to="`/posts/new`">
       Post a clipping
@@ -10,7 +11,10 @@
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
       </router-link>
-      <h3>Clipped by: {{post.user.first_name}} {{post.user.last_name}}</h3>
+      <h3>Clipped by:</h3>
+      <router-link :to="`/users/${post.user_id}`">
+        {{post.user.first_name}} {{post.user.last_name}}
+      </router-link>
       <p>Trade for: {{post.trade_for}}</p>
       <p>Description: {{post.description}}</p>
       <p>Loaction: {{post.location}}</p>
