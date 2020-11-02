@@ -48,7 +48,7 @@
     </div>
 
     <!-- offers upate -->
-    <!-- <div v-if="offerEditToggle === true">
+    <div v-if="offerEditToggle === true">
       <form v-on:submit.prevent="updateOffer(offer)">
         <h2>Update Offer:</h2>
         <ul>
@@ -64,7 +64,7 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Update">
       </form>
-    </div> -->
+    </div>
 
   </div>
 </template>
@@ -115,15 +115,15 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    // destroyOffer: function () {
-    //   axios.delete(`/api/offers/${this.offer.id}`).then(response => {
-    //     console.log("Success", response.data);
-    //     this.$router.push("/posts");
-    //   });
-    // },
-    // selectOffer: function(offer) {
-    //   this.selectedOffer = offer;
-    // }
+    destroyOffer: function () {
+      axios.delete(`/api/offers/${this.offer.id}`).then(response => {
+        console.log("Success", response.data);
+        this.$router.push("/posts");
+      });
+    },
+    selectOffer: function(offer) {
+      this.selectedOffer = offer;
+    }
   },
 };
 </script>

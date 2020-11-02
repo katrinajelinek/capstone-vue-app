@@ -21,12 +21,12 @@
 
 <!-- offers index -->
     <h2>Offers</h2>
-    <div v-for="offer in offers">
+    <div v-for="offer in post.offers">
       <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
       <p>Message: {{offer.message}}</p>
       <img :src="offer.image_url" alt="">
       <div v-if="$parent.getUserId() == offer.user.id">
-        <button v-on:click="offerEditToggle = !offerEditToggle" >
+        <button v-on:click="offerEditToggle = !offerEditToggle">
           Edit
         </button>
       </div>
@@ -37,8 +37,8 @@
       </div> 
     </div>
 
-    <!-- offers upate -->
-    <div v-if="offerEditToggle === true">
+    <!-- offers update -->
+    <!-- <div v-if="offerEditToggle === true">
       <form v-on:submit.prevent="updateOffer(offer)">
         <h2>Update Offer:</h2>
         <ul>
@@ -57,7 +57,7 @@
     </div>
 
 <!-- offers new -->
-    <form v-on:submit.prevent="createOffer()">
+    <!-- <form v-on:submit.prevent="createOffer()">
       <h2>Place an Offer:</h2>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -71,7 +71,7 @@
         <input type="text" class="form-control" v-model="imageUrl">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
-    </form>
+    </form> -->
 
   </div>
 </template>
@@ -85,14 +85,9 @@ export default {
   data: function() {
     return {
       post: {},
-      offers: [],
-      offerUser: [],
       errors: [],
-      message: "",
-      imageUrl: "",
-      post_id: "",
-      selectedOffer: {},
       offerEditToggle: false,
+      selectedOffer: {},
       tags: [],
     };
   },
@@ -104,8 +99,6 @@ export default {
       axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
         console.log(response.data);
         this.post = response.data;
-        this.offers = response.data.offers;
-        this.tags = response.data.tags;
       });
     },
     destroyPost: function () {
@@ -152,6 +145,7 @@ export default {
     // },
     // selectOffer: function(offer) {
     //   this.selectedOffer = offer;
+    //   console.log(this.selectedOffer);
     // }
   },
 };
