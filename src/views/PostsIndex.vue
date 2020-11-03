@@ -2,17 +2,23 @@
   <div class="posts-index">
     <div>
       <label class="typo__label">Select Tags</label>
-      <multiselect v-model="values" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+      <multiselect v-model="tagsFilter" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Search by Tags" label="name" track-by="name" :preselect-first="true">
         <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} tags selected</span></template>
       </multiselect>
       <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
+      <input type="text" v-model="tagsFilter" placeholder="Search by tags" list="allTags">
+      <datalist id="allTags">
+        <option v-for="tag in tags">{{ tag.name }}</option>
+      </datalist>
+      {{tagsFilter}}
     </div>
 
     <router-link :to="`/posts/new`">
       Post a clipping
     </router-link>
 
-    <div v-for="post in orderBy(posts, 'created_at')">
+    <div v-for="post in orderBy(
+      filterBy(posts, tagsFilter, 'tags'), sortAttribute)">
       <img :src="post.image_url" alt="">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
@@ -51,6 +57,7 @@ export default {
       sortAttribute: "created_at",
       values: [],
       tags: [],
+      tagsFilter: [],
     };
   },
   created: function() {
