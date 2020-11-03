@@ -65,6 +65,7 @@ export default {
       axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
         console.log(response.data);
         this.post = response.data;
+        this.values = response.data.tags;
       });
     },
     updatePost: function() {
