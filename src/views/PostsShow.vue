@@ -10,7 +10,7 @@
     <p>Description: {{post.description}}</p>
     <p>Loaction: {{post.location}}</p>
     <h3>Tags:</h3>
-    <div v-for="tag in tags">
+    <div v-for="tag in post.tags">
       <p>{{tag.name}}</p>
     </div>
     <p>Created at: {{post.created_at}}</p>
@@ -29,35 +29,33 @@
         <button v-on:click="offerEditToggle = !offerEditToggle">
           Edit
         </button>
-      </div>
-      <div v-if="$parent.getUserId() == offer.user.id">
+
+<!-- offers update -->
+        <div v-if="offerEditToggle === true">
+          <form v-on:submit.prevent="updateOffer(offer)">
+            <h2>Update Offer:</h2>
+            <ul>
+              <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            </ul>
+            <div class="form-group">
+              <label>Message:</label> 
+              <input type="text" class="form-control" v-model="offer.message">
+            </div>
+            <div>
+              <label>Image:</label> 
+              <input type="text" class="form-control" v-model="offer.imageUrl">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Update">
+          </form>
+        </div>
         <button>
           Delete
         </button>
-      </div> 
-    </div>
-
-    <!-- offers update -->
-    <!-- <div v-if="offerEditToggle === true">
-      <form v-on:submit.prevent="updateOffer(offer)">
-        <h2>Update Offer:</h2>
-        <ul>
-          <li class="text-danger" v-for="error in errors">{{ error }}</li>
-        </ul>
-        <div class="form-group">
-          <label>Message:</label> 
-          <input type="text" class="form-control" v-model="offer.message">
-        </div>
-        <div>
-          <label>Image:</label> 
-          <input type="text" class="form-control" v-model="offer.imageUrl">
-        </div>
-        <input type="submit" class="btn btn-primary" value="Update">
-      </form>
+      </div>
     </div>
 
 <!-- offers new -->
-    <!-- <form v-on:submit.prevent="createOffer()">
+    <form v-on:submit.prevent="createOffer()">
       <h2>Place an Offer:</h2>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -71,7 +69,7 @@
         <input type="text" class="form-control" v-model="imageUrl">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
-    </form> -->
+    </form>
 
   </div>
 </template>
@@ -88,7 +86,6 @@ export default {
       errors: [],
       offerEditToggle: false,
       selectedOffer: {},
-      tags: [],
     };
   },
   created: function() {
@@ -122,31 +119,31 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    // updateOffer: function (offer) {
-    //   var params = {
-    //     message: offer.message,
-    //     image_url: offer.imageUrl,
-    //     post_id: this.post.id,
-    //   };
-    //   axios
-    //     .patch(`/api/offers/${this.offer.id}`, params)
-    //     .then((response) => {
-    //       this.$router.push(`/posts/${this.post.id}`);
-    //     })
-    //     .catch(error => {
-    //       this.errors = error.response.data.errors;
-    //     });
-    // },
-    // destroyOffer: function () {
-    //   axios.delete(`/api/offers/${this.offer.id}`).then(response => {
-    //     console.log("Success", response.data);
-    //     this.$router.push("/posts");
-    //   });
-    // },
-    // selectOffer: function(offer) {
-    //   this.selectedOffer = offer;
-    //   console.log(this.selectedOffer);
-    // }
+    updateOffer: function (offer) {
+      var params = {
+        message: offer.message,
+        image_url: offer.imageUrl,
+        post_id: this.post.id,
+      };
+      axios
+        .patch(`/api/offers/${offer.id}`, params)
+        .then((response) => {
+          this.$router.push(`/posts/${this.post.id}`);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    },
+    destroyOffer: function () {
+      axios.delete(`/api/offers/${this.offer.id}`).then(response => {
+        console.log("Success", response.data);
+        this.$router.push("/posts");
+      });
+    },
+    selectOffer: function(offer) {
+      this.selectedOffer = offer;
+      console.log(this.selectedOffer);
+    }
   },
 };
 </script>

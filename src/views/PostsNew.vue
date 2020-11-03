@@ -35,6 +35,7 @@
       </multiselect>
       <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
     </div>
+    {{values}}
   </div>
 </template>
 
@@ -56,7 +57,6 @@ export default {
       errors: [],
       values: [],
       tags: [],
-      tagIds: []
     };
   },
   created: function() {
@@ -64,13 +64,16 @@ export default {
   },
   methods: {
     createPost: function() {
+      var tagIds = this.values.map(tag => {
+        return tag.id;
+      });
       var params = {
         plant_type: this.plantType,
         trade_for: this.tradeFor,
         description: this.description,
         location: this.location,
         image_url: this.imageUrl,
-        tag_ids: this.tagIds,
+        tag_ids: tagIds,
       };
       axios
         .post("/api/posts", params)
