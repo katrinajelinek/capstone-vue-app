@@ -23,7 +23,11 @@
       </router-link>
       <p>Trade for: {{post.trade_for}}</p>
       <p>Description: {{post.description}}</p>
-      <p>Loaction: {{post.location}}</p>
+      <p>Location: {{post.location}}</p>
+      <p>Tags:</p>
+      <div v-for="tag in post.tags">
+        {{tag.name}}
+      </div>
       <p>Created at: {{post.created_at}}</p> <br> <br>
     </div>
   </div>
