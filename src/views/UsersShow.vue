@@ -36,10 +36,10 @@
       <p>Message: {{offer.message}}</p>
       <img :src="offer.image_url" alt="">
       <div v-if="$parent.getUserId() == offer.user_id">
-        <button v-on:click="offerEditToggle = !offerEditToggle" >
+        <button v-on:click="offerEditAuthentication = offer.id" >
           Edit
         </button>
-        <div v-if="offerEditToggle === true">
+        <div v-if="offerEditAuthentication === offer.id">
           <form v-on:submit.prevent="updateOffer(offer)">
             <h2>Update Offer:</h2>
             <ul>
@@ -75,7 +75,7 @@ export default {
     return {
       user: {},
       errors: [],
-      offerEditToggle: false,
+      offerEditAuthentication: null,
     };
   },
   created: function() {
@@ -103,6 +103,7 @@ export default {
         .patch(`/api/offers/${offer.id}`, params)
         .then((response) => {
           this.$router.push(`/users/${this.user.id}`);
+          this.offerEditAuthentication = null;
         })
         .catch(error => {
           this.errors = error.response.data.errors;
