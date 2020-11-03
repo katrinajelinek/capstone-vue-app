@@ -12,7 +12,7 @@
       Post a clipping
     </router-link>
 
-    <div v-for="post in posts">
+    <div v-for="post in orderBy(posts, 'created_at')">
       <img :src="post.image_url" alt="">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
@@ -38,8 +38,10 @@
 <script>
 import axios from "axios";
 import Multiselect from "vue-multiselect";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   components: {
     Multiselect
   },
