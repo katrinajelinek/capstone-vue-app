@@ -53,7 +53,7 @@ export default {
       post: {},
       errors: [],
       tags: [],
-      values: []
+      values: [],
     };
   },
   created: function() {
@@ -68,12 +68,16 @@ export default {
       });
     },
     updatePost: function() {
+      var tagIds = this.values.map(tag => {
+        return tag.id;
+      });
       var params = {
         plant_type: this.post.plant_type,
         trade_for: this.post.trade_for,
         description: this.post.description,
         location: this.post.location,
-        image_url: this.post.image_url
+        image_url: this.post.image_url,
+        tag_ids: tagIds
       };
       axios
         .patch(`/api/posts/${this.post.id}`, params)
