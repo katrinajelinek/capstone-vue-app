@@ -30,7 +30,7 @@
           Edit
         </button>
 
-<!-- offers update -->
+<!-- update offer -->
         <div v-if="offerEditToggle === true">
           <form v-on:submit.prevent="updateOffer(offer)">
             <h2>Update Offer:</h2>
@@ -48,13 +48,13 @@
             <input type="submit" class="btn btn-primary" value="Update">
           </form>
         </div>
-        <button>
+        <button v-on:click="destroyOffer(offer)">
           Delete
         </button>
       </div>
     </div>
 
-<!-- offers new -->
+<!-- new offer -->
     <form v-on:submit.prevent="createOffer()">
       <h2>Place an Offer:</h2>
       <ul>
@@ -85,7 +85,6 @@ export default {
       post: {},
       errors: [],
       offerEditToggle: false,
-      selectedOffer: {},
     };
   },
   created: function() {
@@ -134,16 +133,12 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    destroyOffer: function () {
-      axios.delete(`/api/offers/${this.offer.id}`).then(response => {
+    destroyOffer: function (offer) {
+      axios.delete(`/api/offers/${offer.id}`).then(response => {
         console.log("Success", response.data);
         this.$router.push("/posts");
       });
     },
-    selectOffer: function(offer) {
-      this.selectedOffer = offer;
-      console.log(this.selectedOffer);
-    }
   },
 };
 </script>
