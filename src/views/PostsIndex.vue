@@ -5,20 +5,13 @@
       <multiselect v-model="tagsFilter" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Search by Tags" label="name" track-by="name" :preselect-first="true">
         <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} tags selected</span></template>
       </multiselect>
-      <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
-      <input type="text" v-model="tagsFilter" placeholder="Search by tags" list="allTags">
-      <datalist id="allTags">
-        <option v-for="tag in tags">{{ tag.name }}</option>
-      </datalist>
-      {{tagsFilter}}
     </div>
 
     <router-link :to="`/posts/new`">
       Post a clipping
     </router-link>
 
-    <div v-for="post in orderBy(
-      filterBy(posts, tagsFilter, 'tags'), sortAttribute)">
+    <div v-for="post in orderBy(filteredPostsByTags, sortAttribute)">
       <img :src="post.image_url" alt="">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
@@ -64,6 +57,11 @@ export default {
     this.indexPosts();
     this.indexTags();
   },
+  computed: {
+    filteredPostsByTags() {
+      return this.getByTag(this.posts, this.tagsFilter);
+    }
+  },
   methods: {
     indexPosts: function () {
       axios.get("/api/posts").then(response => {
@@ -79,6 +77,12 @@ export default {
         console.log(response.data);
         this.tags = response.data;
       });
+    },
+    getByTag: function (posts, tagsFilter) {
+      tagsFilter.forEach(tag => {
+        posts = this.filterBy(posts, tag.name);
+      });
+      return posts;
     },
   },
 };
