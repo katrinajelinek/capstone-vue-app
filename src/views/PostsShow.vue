@@ -8,7 +8,7 @@
     </router-link>
     <h2>Trade for: {{post.trade_for}}</h2>
     <p>Description: {{post.description}}</p>
-    <p>Loaction: {{post.location}}</p>
+    <p>Location: {{post.location}}</p>
     <h3>Tags:</h3>
     <div v-for="tag in post.tags">
       <p>{{tag.name}}</p>
@@ -22,7 +22,9 @@
 <!-- offers index -->
     <h2>Offers</h2>
     <div v-for="offer in post.offers">
-      <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
+      <router-link :to="`/users/${offer.user_id}`">
+        <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
+      </router-link>
       <p>Message: {{offer.message}}</p>
       <img :src="offer.image_url" alt="">
       <div v-if="$parent.getUserId() == offer.user.id">
