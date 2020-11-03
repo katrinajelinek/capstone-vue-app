@@ -11,7 +11,7 @@
 
     <!-- posts index -->
     <h2>Posts</h2>
-    <div v-for="post in user.posts">
+    <div v-for="post in orderBy(user.posts, 'created_at')">
       <h3>{{post.plant_type}}</h3>
       <p>Trade for: {{post.trade_for}}</p>
       <p>Description: {{post.description}}</p>
@@ -29,7 +29,7 @@
 
 <!-- offers index -->
     <h2>Offers</h2>
-    <div v-for="offer in user.offers">
+    <div v-for="offer in orderBy(user.offers, 'created_at')">
       <router-link :to="`/posts/${offer.post_id}`">
         <h3>Posted on: {{offer.post_title}}</h3>
       </router-link>
@@ -69,13 +69,17 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
+
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       user: {},
       errors: [],
       offerEditAuthentication: null,
+      sortAttribute: "created_at",
     };
   },
   created: function() {
@@ -114,6 +118,9 @@ export default {
         console.log("Success", response.data);
         this.$router.push("/posts");
       });
+    },
+    setSortAttribute: function (attribute) {
+      this.sortAttribute = attribute;
     },
   },
 };
