@@ -23,7 +23,7 @@
       </div>
       <div class="form-group">
         <label>Image:</label> 
-        <input type="text" class="form-control" v-model="imageUrl">
+        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
@@ -53,7 +53,7 @@ export default {
       tradeFor: "",
       description: "",
       location: "",
-      imageUrl: "",
+      image: "",
       errors: [],
       values: [],
       tags: [],
@@ -63,20 +63,24 @@ export default {
     this.indexTags();
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     createPost: function() {
       var tagIds = this.values.map(tag => {
         return tag.id;
       });
-      var params = {
-        plant_type: this.plantType,
-        trade_for: this.tradeFor,
-        description: this.description,
-        location: this.location,
-        image_url: this.imageUrl,
-        tag_ids: tagIds,
-      };
+      var formData = new FormData();
+      formData.append("plant_type", this.plantType);
+      formData.append("trade_for", this.tradeFor);
+      formData.append("description", this.description);
+      formData.append("location", this.location);
+      formData.append("image_url", this.image);
+      formData.append("tag_ids", tagIds);
       axios
-        .post("/api/posts", params)
+        .post("/api/posts", formData)
         .then((response) => {
           this.$router.push("/posts");
         })

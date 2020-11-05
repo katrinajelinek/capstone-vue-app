@@ -27,7 +27,7 @@
       </div>
       <div class="form-group">
         <label>Image:</label> 
-        <input type="text" class="form-control" v-model="imageUrl">
+        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
@@ -50,18 +50,28 @@ export default {
     };
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     submit: function() {
-      var params = {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        email: this.email,
-        password: this.password,
-        password_confirmation: this.passwordConfirmation,
-        image_url: this.imageUrl
-      };
+      var formData = new FormData();
+      formData.append("first_name", this.firstName);
+      formData.append("last_name", this.lastName);
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+      formData.append("password_confirmation", this.passwordConfirmation);
+      formData.append("image_url", this.image);
       axios
-        .post("/api/users", params)
+        .post("/api/users", formData)
         .then(response => {
+          this.first_name = "";
+          this.last_name = "";
+          this.email = "";
+          this.password = "";
+          this.password_confirmation = "";
+          this.$refs.fileInput.value = "";
           this.$router.push("/login");
         })
         .catch(error => {
