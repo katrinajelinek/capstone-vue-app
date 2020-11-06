@@ -23,7 +23,7 @@
       </div>
       <div class="form-group">
         <label>Image:</label> 
-        <input type="text" class="form-control" v-model="post.image_url">
+        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <input type="submit" class="btn btn-primary" value="Update">
     </form>
@@ -54,6 +54,11 @@ export default {
       errors: [],
       tags: [],
       values: [],
+      plantType: "",
+      tradeFor: "",
+      description: "",
+      location: "",
+      image: "",
     };
   },
   created: function() {
@@ -61,6 +66,11 @@ export default {
     this.indexTags();
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     showPost: function () {
       axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
         console.log(response.data);
@@ -72,16 +82,15 @@ export default {
       var tagIds = this.values.map(tag => {
         return tag.id;
       });
-      var params = {
-        plant_type: this.post.plant_type,
-        trade_for: this.post.trade_for,
-        description: this.post.description,
-        location: this.post.location,
-        image_url: this.post.image_url,
-        tag_ids: tagIds
-      };
+      var formData = new FormData();
+      formData.append("plant_type", this.plantType);
+      formData.append("trade_for", this.tradeFor);
+      formData.append("description", this.description);
+      formData.append("location", this.location);
+      formData.append("image", this.image);
+      formData.append("tag_ids", tagIds);
       axios
-        .patch(`/api/posts/${this.post.id}`, params)
+        .patch(`/api/posts/${this.post.id}`, formData)
         .then((response) => {
           this.$router.push(`/posts/${this.post.id}`);
         })
