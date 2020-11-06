@@ -87,6 +87,8 @@ export default {
       post: {},
       errors: [],
       offerEditToggle: false,
+      message: "",
+      imageUrl: ""
     };
   },
   created: function() {
