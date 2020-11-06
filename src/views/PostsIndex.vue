@@ -12,7 +12,7 @@
     </router-link>
 
     <div v-for="post in orderBy(filteredPostsByTags, sortAttribute)">
-      <img :src="post.image_url" alt="">
+      <img :src="post.image_url" alt="" class="image-fit">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
       </router-link>

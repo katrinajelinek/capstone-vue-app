@@ -34,6 +34,12 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.image-fit{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 </style>
 
 <script>

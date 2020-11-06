@@ -1,6 +1,6 @@
 <template>
   <div class="users-show">
-    <img :src="user.image_url" alt="">
+    <img :src="user.image_url" alt="" class="image-fit">
     <h3>{{user.first_name}} {{user.last_name}}</h3>
     <div v-if="$parent.getUserId() == user.id">
         <router-link :to="`/users/${user.id}/edit`">Edit Profile</router-link>
@@ -34,7 +34,7 @@
         <h3>Posted on: {{offer.post_title}}</h3>
       </router-link>
       <p>Message: {{offer.message}}</p>
-      <img :src="offer.image_url" alt="">
+      <img :src="offer.image_url" alt="" class="image-fit">
       <div v-if="$parent.getUserId() == offer.user_id">
         <button v-on:click="offerEditAuthentication = offer.id" >
           Edit

@@ -35,7 +35,6 @@
       </multiselect>
       <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
     </div>
-    {{values}}
   </div>
 </template>
 

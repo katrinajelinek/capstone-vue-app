@@ -1,6 +1,6 @@
 <template>
   <div class="posts-show">
-    <img :src="post.image_url" alt="">
+    <img :src="post.image_url" alt="" class="image-fit">
     <h1>{{post.plant_type}}</h1>
     <h3>Clipped by:</h3>
     <router-link :to="`/users/${post.user_id}`">
@@ -26,7 +26,7 @@
         <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
       </router-link>
       <p>Message: {{offer.message}}</p>
-      <img :src="offer.image_url" alt="">
+      <img :src="offer.image_url" alt="" class="image-fit">
       <div v-if="$parent.getUserId() == offer.user.id">
         <button v-on:click="offerEditToggle = !offerEditToggle">
           Edit
