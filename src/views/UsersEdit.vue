@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <label>Image:</label> 
-        <input type="text" class="form-control" v-model="user.image_url">
+        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <div class="form-group">
         <label>To change password, please enter your password:</label> 
@@ -41,6 +41,11 @@ export default {
     return {
       user: {},
       errors: [],
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      image: ""
     };
   },
   created: function() {
@@ -50,16 +55,20 @@ export default {
     });
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     updateUser: function() {
-      var params = {
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        password: this.user.password,
-        image_url: this.user.image_url
-      };
+      var formData = new FormData();
+      formData.append("first_name", this.user.firstName);
+      formData.append("last_name", this.user.lastName);
+      formData.append("email", this.user.email);
+      formData.append("password", this.password);
+      formData.append("image", this.image);
       axios
-        .patch(`/api/users/${this.user.id}`, params)
+        .patch(`/api/users/${this.user.id}`, formData)
         .then((response) => {
           this.$router.push(`/users/${this.user.id}`);
         })
