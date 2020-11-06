@@ -12,7 +12,9 @@
     <!-- posts index -->
     <h2>Posts</h2>
     <div v-for="post in orderBy(user.posts, 'created_at')">
-      <h3>{{post.plant_type}}</h3>
+      <router-link :to="`/posts/${post.id}`">
+       <h3>{{post.plant_type}}</h3>
+      </router-link>
       <p>Trade for: {{post.trade_for}}</p>
       <p>Description: {{post.description}}</p>
       <p>Loaction: {{post.location}}</p>
