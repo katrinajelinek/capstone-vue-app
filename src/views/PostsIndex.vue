@@ -11,7 +11,7 @@
       Post a clipping
     </router-link>
 
-    <div v-for="post in orderBy(filteredPostsByTags, sortAttribute)">
+    <div v-for="post in orderBy(filteredPostsByTags, sortAttribute, -1)">
       <img :src="post.image_url" alt="" class="image-fit">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
