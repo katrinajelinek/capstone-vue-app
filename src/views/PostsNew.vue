@@ -77,7 +77,7 @@ export default {
       formData.append("trade_for", this.tradeFor);
       formData.append("description", this.description);
       formData.append("location", this.location);
-      formData.append("image_url", this.image);
+      formData.append("image", this.image);
       formData.append("tag_ids", tagIds);
       axios
         .post("/api/posts", formData)
