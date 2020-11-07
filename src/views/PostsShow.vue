@@ -45,7 +45,7 @@
             </div>
             <div>
               <label>Image:</label> 
-              <input type="text" class="form-control" v-model="offer.imageUrl">
+              <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
             </div>
             <input type="submit" class="btn btn-primary" value="Update">
           </form>
@@ -68,7 +68,7 @@
       </div>
       <div>
         <label>Image:</label> 
-        <input type="text" class="form-control" v-model="imageUrl">
+        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
@@ -88,13 +88,18 @@ export default {
       errors: [],
       offerEditToggle: false,
       message: "",
-      imageUrl: ""
+      image: ""
     };
   },
   created: function() {
     this.showPost();
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     showPost: function () {
       axios.get(`/api/posts/${this.$route.params.id}`).then(response => {
         console.log(response.data);
@@ -108,13 +113,12 @@ export default {
       });
     },
     createOffer: function() {
-      var params = {
-        message: this.message,
-        image_url: this.imageUrl,
-        post_id: this.post.id,
-      };
+      var formData = new FormData();
+      formData.append("message", this.message);
+      formData.append("image", this.image);
+      formData.append("post_id", this.post.id);
       axios
-        .post("/api/offers", params)
+        .post("/api/offers", formData)
         .then((response) => {
           this.$router.push(`/posts/${this.post.id}`);
         })
@@ -123,13 +127,12 @@ export default {
         });
     },
     updateOffer: function (offer) {
-      var params = {
-        message: offer.message,
-        image_url: offer.imageUrl,
-        post_id: this.post.id,
-      };
+      var formData = new FormData();
+      formData.append("message", offer.message);
+      formData.append("post_id", offer.post_id);
+      formData.append("image", this.image);
       axios
-        .patch(`/api/offers/${offer.id}`, params)
+        .patch(`/api/offers/${offer.id}`, formData)
         .then((response) => {
           this.$router.push(`/posts/${this.post.id}`);
         })

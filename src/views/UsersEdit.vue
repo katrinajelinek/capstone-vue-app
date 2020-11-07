@@ -1,6 +1,6 @@
 <template>
   <div class="users-edit">
-    <form v-on:submit.prevent="updateUser()">
+    <form v-on:submit.prevent="updateUser(user)">
       <h1>Edit Clipping</h1>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -41,11 +41,6 @@ export default {
     return {
       user: {},
       errors: [],
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      image: ""
     };
   },
   created: function() {
@@ -60,13 +55,13 @@ export default {
         this.image = event.target.files[0];
       }
     },
-    updateUser: function() {
+    updateUser: function(user) {
       var formData = new FormData();
-      formData.append("first_name", this.user.firstName);
-      formData.append("last_name", this.user.lastName);
-      formData.append("email", this.user.email);
-      formData.append("password", this.password);
-      formData.append("image", this.image);
+      formData.append("first_name", user.first_name);
+      formData.append("last_name", user.last_name);
+      formData.append("email", user.email);
+      formData.append("password", user.password);
+      formData.append("image", user.image);
       axios
         .patch(`/api/users/${this.user.id}`, formData)
         .then((response) => {

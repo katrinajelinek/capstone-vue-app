@@ -45,7 +45,7 @@ export default {
       email: "",
       password: "",
       passwordConfirmation: "",
-      imageUrl: "",
+      image: "",
       errors: []
     };
   },
@@ -62,16 +62,10 @@ export default {
       formData.append("email", this.email);
       formData.append("password", this.password);
       formData.append("password_confirmation", this.passwordConfirmation);
-      formData.append("image_url", this.image);
+      formData.append("image", this.image);
       axios
         .post("/api/users", formData)
         .then(response => {
-          this.first_name = "";
-          this.last_name = "";
-          this.email = "";
-          this.password = "";
-          this.password_confirmation = "";
-          this.$refs.fileInput.value = "";
           this.$router.push("/login");
         })
         .catch(error => {

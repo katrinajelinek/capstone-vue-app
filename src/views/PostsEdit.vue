@@ -1,6 +1,6 @@
 <template>
   <div class="posts-edit">
-    <form v-on:submit.prevent="updatePost()">
+    <form v-on:submit.prevent="updatePost(post)">
       <h1>Edit Clipping</h1>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -35,7 +35,6 @@
       <multiselect v-model="values" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
         <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} tags selected</span></template>
       </multiselect>
-      <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
     </div>
   </div>
 </template>
@@ -54,11 +53,7 @@ export default {
       errors: [],
       tags: [],
       values: [],
-      plantType: "",
-      tradeFor: "",
-      description: "",
-      location: "",
-      image: "",
+      image: ""
     };
   },
   created: function() {
@@ -78,17 +73,19 @@ export default {
         this.values = response.data.tags;
       });
     },
-    updatePost: function() {
+    updatePost: function(post) {
       var tagIds = this.values.map(tag => {
         return tag.id;
       });
       var formData = new FormData();
-      formData.append("plant_type", this.plantType);
-      formData.append("trade_for", this.tradeFor);
-      formData.append("description", this.description);
-      formData.append("location", this.location);
-      formData.append("image", this.image);
-      formData.append("tag_ids", tagIds);
+      formData.append("plant_type", post.plant_type);
+      formData.append("trade_for", post.trade_for);
+      formData.append("description", post.description);
+      formData.append("location", post.location);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
+      formData.append("tag_ids", JSON.stringify(tagIds));
       axios
         .patch(`/api/posts/${this.post.id}`, formData)
         .then((response) => {
