@@ -20,8 +20,6 @@
       <router-link :to="`/users/${post.user_id}`">
         {{post.user.first_name}} {{post.user.last_name}}
       </router-link>
-      <p>Trade for: {{post.trade_for}}</p>
-      <p>Description: {{post.description}}</p>
       <p>Location: {{post.location}}</p>
       <p>Tags:</p>
       <div v-for="tag in post.tags">
