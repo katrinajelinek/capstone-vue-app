@@ -77,7 +77,7 @@ export default {
       formData.append("description", this.description);
       formData.append("location", this.location);
       formData.append("image", this.image);
-      formData.append("tag_ids", tagIds);
+      formData.append("tag_ids", JSON.stringify(tagIds));
       axios
         .post("/api/posts", formData)
         .then((response) => {

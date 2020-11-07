@@ -61,7 +61,9 @@ export default {
       formData.append("last_name", user.last_name);
       formData.append("email", user.email);
       formData.append("password", user.password);
-      formData.append("image", user.image);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
       axios
         .patch(`/api/users/${this.user.id}`, formData)
         .then((response) => {

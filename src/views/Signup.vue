@@ -62,7 +62,9 @@ export default {
       formData.append("email", this.email);
       formData.append("password", this.password);
       formData.append("password_confirmation", this.passwordConfirmation);
-      formData.append("image", this.image);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
       axios
         .post("/api/users", formData)
         .then(response => {

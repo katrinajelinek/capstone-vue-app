@@ -84,7 +84,9 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      post: {},
+      post: {
+        user: {}
+      },
       errors: [],
       offerEditToggle: false,
       message: "",
@@ -115,8 +117,10 @@ export default {
     createOffer: function() {
       var formData = new FormData();
       formData.append("message", this.message);
-      formData.append("image", this.image);
       formData.append("post_id", this.post.id);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
       axios
         .post("/api/offers", formData)
         .then((response) => {
@@ -130,7 +134,9 @@ export default {
       var formData = new FormData();
       formData.append("message", offer.message);
       formData.append("post_id", offer.post_id);
-      formData.append("image", this.image);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
       axios
         .patch(`/api/offers/${offer.id}`, formData)
         .then((response) => {
