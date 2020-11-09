@@ -21,12 +21,29 @@
         <label>Image:</label> 
         <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>To change password, please enter your password:</label> 
         <input type="password" class="form-control" v-model="user.password">
-      </div>
+      </div> -->
       <input type="submit" class="btn btn-primary" value="Update">
     </form>
+    <button v-on:click="passwordUpdateToggle = !passwordUpdateToggle">
+        Update Password
+      </button>
+      <div v-if="passwordUpdateToggle === true">
+        <div class="form-group">
+          <label>Old Password</label>
+          <input type="password" class="form-control" v-model="old_password">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" class="form-control" v-model="password">
+        </div>
+        <div class="form-group">
+          <label>Password Confirmation</label>
+          <input type="password" class="form-control" v-model="password_confirmation">
+        </div>
+      </div>
     <button v-on:click="destroyUser()">
         Delete
       </button>
@@ -41,6 +58,10 @@ export default {
     return {
       user: {},
       errors: [],
+      old_password: "",
+      password: "",
+      password_confirmation: "",
+      passwordUpdateToggle: false
     };
   },
   created: function() {
@@ -61,6 +82,9 @@ export default {
       formData.append("last_name", user.last_name);
       formData.append("email", user.email);
       formData.append("password", user.password);
+      formData.append("old_password", this.old_password);
+      formData.append("password", this.password);
+      formData.append("password_confirmation", this.password_confirmation);
       if (this.image) {
         formData.append("image", this.image);
       }
