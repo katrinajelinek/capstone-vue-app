@@ -1,17 +1,21 @@
 <template>
   <div class="posts-index">
+    <input type="text" v-model="plantTypeFilter" placeholder="Search by Clipping" list="plantTypes"> <br>
+    <datalist id="plantTypes">
+      <option v-for="post in posts">{{post.plant_type}}</option>
+    </datalist> <br>
     <div>
-      <label class="typo__label">Select Tags</label>
-      <multiselect v-model="tagsFilter" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Search by Tags" label="name" track-by="name" :preselect-first="true">
+      <label class="typo__label">Or search by tags:</label>
+      <multiselect v-model="tagsFilter" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Tags" label="name" track-by="name" :preselect-first="true">
         <template slot="selection" slot-scope="{ values, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} tags selected</span></template>
       </multiselect>
-    </div>
+    </div> <br>
 
     <router-link :to="`/posts/new`">
       Post a clipping
-    </router-link>
+    </router-link> <br> <br>
 
-    <div v-for="post in orderBy(filteredPostsByTags, sortAttribute, -1)">
+    <div v-for="post in orderBy(filterBy(filteredPostsByTags, plantTypeFilter, 'plant_type'), sortAttribute, -1)">
       <img :src="post.image_url" alt="" class="image-fit">
       <router-link :to="`/posts/${post.id}`">
         <h2>{{post.plant_type}}</h2>
@@ -26,7 +30,7 @@
         {{tag.name}}
       </div>
       <p>Created at: {{post.created_at}}</p> <br> <br>
-    </div>
+    </div> <br>
   </div>
 </template>
 
@@ -49,6 +53,7 @@ export default {
       values: [],
       tags: [],
       tagsFilter: [],
+      plantTypeFilter: "",
     };
   },
   created: function() {
