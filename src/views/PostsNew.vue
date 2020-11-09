@@ -68,15 +68,15 @@ export default {
       }
     },
     createPost: function() {
-      var tagIds = this.values.map(tag => {
-        return tag.id;
-      });
+      var tagIds = this.values.map((tag) => tag.id);
       var formData = new FormData();
       formData.append("plant_type", this.plantType);
       formData.append("trade_for", this.tradeFor);
       formData.append("description", this.description);
       formData.append("location", this.location);
-      formData.append("image", this.image);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
       formData.append("tag_ids", JSON.stringify(tagIds));
       axios
         .post("/api/posts", formData)
