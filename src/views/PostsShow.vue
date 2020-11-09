@@ -133,7 +133,7 @@ export default {
       axios
         .post("/api/offers", formData)
         .then((response) => {
-          this.$router.push(`/posts/${this.post.id}`);
+          this.post.offers.push(response.data);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
