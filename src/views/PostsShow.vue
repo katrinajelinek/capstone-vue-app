@@ -27,13 +27,21 @@
       </router-link>
       <p>Message: {{offer.message}}</p>
       <img :src="offer.image_url" alt="" class="image-fit">
-      <div v-if="$parent.getUserId() == offer.user.id">
-        <button v-on:click="offerEditToggle = !offerEditToggle">
+      <div v-if="$parent.getUserId() == post.user_id">
+        <button v-on:click="offerAcceptToggle = offer.id">
+          Accept Offer
+        </button>
+        <div v-if="offerAcceptToggle === offer.id">
+          <p>{{offer.user.first_name}} {{offer.user.last_name}}'s email: {{offer.user.email}}</p>
+        </div>
+      </div>
+      <div v-if="$parent.getUserId() == offer.user_id">
+        <button v-on:click="offerEditAuthentication = offer.id">
           Edit
         </button>
 
 <!-- update offer -->
-        <div v-if="offerEditToggle === true">
+        <div v-if="offerEditAuthentication === offer.id">
           <form v-on:submit.prevent="updateOffer(offer)">
             <h2>Update Offer:</h2>
             <ul>
@@ -88,7 +96,8 @@ export default {
         user: {}
       },
       errors: [],
-      offerEditToggle: false,
+      offerAcceptToggle: null,
+      offerEditAuthentication: null,
       message: "",
       image: ""
     };
