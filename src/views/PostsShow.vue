@@ -163,9 +163,10 @@ export default {
         });
     },
     destroyOffer: function (offer) {
+      var index = this.post.offers.indexOf(offer);
       axios.delete(`/api/offers/${offer.id}`).then(response => {
         console.log("Success", response.data);
-        this.$router.push("/posts");
+        this.post.offers.splice(index, 1);
       });
     },
   },
