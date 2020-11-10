@@ -53,7 +53,7 @@
             </div>
             <div>
               <label>Image:</label> 
-              <input type="text" class="form-control" v-model="offer.imageUrl">
+              <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
             </div>
             <input type="submit" class="btn btn-primary" value="Update">
           </form>
@@ -88,6 +88,11 @@ export default {
     this.showUser();
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     showUser: function () {
       axios.get(`/api/users/${this.$route.params.id}`).then(response => {
         console.log(response.data);
@@ -101,14 +106,17 @@ export default {
       });
     },
     updateOffer: function (offer) {
-      var params = {
-        message: offer.message,
-        image_url: offer.imageUrl,
-      };
+      var formData = new FormData();
+      var index = this.user.offers.indexOf(offer);
+      formData.append("message", offer.message);
+      formData.append("post_id", offer.post_id);
+      if (this.image) {
+        formData.append("image", this.image);
+      }
       axios
-        .patch(`/api/offers/${offer.id}`, params)
+        .patch(`/api/offers/${offer.id}`, formData)
         .then((response) => {
-          this.$router.push(`/users/${this.user.id}`);
+          this.user.offers[index] = (response.data);
           this.offerEditAuthentication = null;
         })
         .catch(error => {
@@ -118,7 +126,7 @@ export default {
     destroyOffer: function (offer) {
       axios.delete(`/api/offers/${offer.id}`).then(response => {
         console.log("Success", response.data);
-        this.$router.push("/posts");
+        this.$router.push(`/posts/${offer.post_id}`);
       });
     },
     setSortAttribute: function (attribute) {

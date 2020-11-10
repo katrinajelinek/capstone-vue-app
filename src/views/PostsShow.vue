@@ -146,7 +146,6 @@ export default {
     updateOffer: function (offer) {
       var formData = new FormData();
       var index = this.post.offers.indexOf(offer);
-      this.offerEditAuthentication = null;
       formData.append("message", offer.message);
       formData.append("post_id", offer.post_id);
       if (this.image) {
@@ -156,6 +155,7 @@ export default {
         .patch(`/api/offers/${offer.id}`, formData)
         .then((response) => {
           this.post.offers[index] = (response.data);
+          this.offerEditAuthentication = null;
         })
         .catch(error => {
           this.errors = error.response.data.errors;
