@@ -35,8 +35,9 @@
       <router-link :to="`/posts/${offer.post_id}`">
         <h3>Posted on: {{offer.post_title}}</h3>
       </router-link>
-      <p>Message: {{offer.message}}</p>
       <img :src="offer.image_url" alt="" class="image-fit">
+      <p>Message: {{offer.message}}</p>
+      <p>Created {{relativeDate(offer.created_at)}}</p>
       <div v-if="$parent.getUserId() == offer.user_id">
         <button v-on:click="offerEditAuthentication = offer.id" >
           Edit
