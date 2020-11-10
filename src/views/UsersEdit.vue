@@ -100,6 +100,8 @@ export default {
     destroyUser: function () {
       axios.delete(`/api/users/${this.user.id}`).then(response => {
         console.log("Success", response.data);
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("user_id");
         this.$router.push("/posts");
       });
     }
