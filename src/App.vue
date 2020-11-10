@@ -7,7 +7,8 @@
       <router-link to="/posts/new"> New Clipping</router-link> |
       <router-link to="/signup" v-if="!isLoggedIn()">Signup</router-link> |
       <router-link to="/login" v-if="!isLoggedIn()">Login</router-link> |
-      <router-link to="/logout" v-if="isLoggedIn()">Logout</router-link>
+      <router-link to="/logout" v-if="isLoggedIn()">Logout</router-link> |
+      <router-link :to="`/users/${getUserId()}`" v-if="isLoggedIn()">Profile</router-link>
     </div>
     <router-view/>
   </div>
