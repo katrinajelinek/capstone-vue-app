@@ -22,7 +22,7 @@
       <div v-for="tag in post.tags">
         <p>{{tag.name}}</p>
       </div>
-      <p>Created at: {{post.created_at}}</p>
+      <p>Created {{relativeDate(post.created_at)}}</p>
       <div v-if="$parent.getUserId() == post.user_id">
         <router-link :to="`/posts/${post.id}/edit`">Edit</router-link>
       </div> 
@@ -72,6 +72,7 @@
 <script>
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
+import moment from "moment";
 
 
 export default {
@@ -88,6 +89,9 @@ export default {
     this.showUser();
   },
   methods: {
+    relativeDate: function (date) {
+      return moment(date).fromNow();
+    },
     setFile: function(event) {
       if (event.target.files.length > 0) {
         this.image = event.target.files[0];
