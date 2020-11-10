@@ -29,7 +29,7 @@
       <div v-for="tag in post.tags">
         {{tag.name}}
       </div>
-      <p>Created at: {{post.created_at}}</p> <br> <br>
+      <p>Created {{relativeDate(post.created_at)}}</p> <br> <br>
     </div> <br>
   </div>
 </template>
@@ -40,6 +40,7 @@
 import axios from "axios";
 import Multiselect from "vue-multiselect";
 import Vue2Filters from "vue2-filters";
+import moment from "moment";
 
 export default {
   mixins: [Vue2Filters.mixin],
@@ -66,6 +67,9 @@ export default {
     }
   },
   methods: {
+    relativeDate: function (date) {
+      return moment(date).fromNow();
+    },
     indexPosts: function () {
       axios.get("/api/posts").then(response => {
         console.log(response.data);
