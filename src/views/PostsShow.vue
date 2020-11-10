@@ -145,6 +145,8 @@ export default {
     },
     updateOffer: function (offer) {
       var formData = new FormData();
+      var index = this.post.offers.indexOf(offer);
+      this.offerEditAuthentication = null;
       formData.append("message", offer.message);
       formData.append("post_id", offer.post_id);
       if (this.image) {
@@ -153,7 +155,7 @@ export default {
       axios
         .patch(`/api/offers/${offer.id}`, formData)
         .then((response) => {
-          this.$router.push(`/posts/${this.post.id}`);
+          this.post.offers[index] = (response.data);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
