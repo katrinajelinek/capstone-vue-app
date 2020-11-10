@@ -129,9 +129,10 @@ export default {
         });
     },
     destroyOffer: function (offer) {
+      var index = this.user.offers.indexOf(offer);
       axios.delete(`/api/offers/${offer.id}`).then(response => {
         console.log("Success", response.data);
-        this.$router.push(`/posts/${offer.post_id}`);
+        this.user.offers.splice(index, 1);
       });
     },
     setSortAttribute: function (attribute) {
