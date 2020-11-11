@@ -16,20 +16,22 @@
     </router-link> <br> <br>
 
     <div v-for="post in orderBy(filterBy(filteredPostsByTags, plantTypeFilter, 'plant_type'), sortAttribute, -1)">
-      <img :src="post.image_url" alt="" class="image-fit">
-      <router-link :to="`/posts/${post.id}`">
-        <h2>{{post.plant_type}}</h2>
-      </router-link>
-      <h3>Clipped by:</h3>
-      <router-link :to="`/users/${post.user_id}`">
-        {{post.user.first_name}} {{post.user.last_name}}
-      </router-link>
-      <p>Location: {{post.location}}</p>
-      <p>Tags:</p>
-      <div v-for="tag in post.tags">
-        {{tag.name}}
+      <div v-if="post.offer_accepted == null">
+        <img :src="post.image_url" alt="" class="image-fit">
+        <router-link :to="`/posts/${post.id}`">
+          <h2>{{post.plant_type}}</h2>
+        </router-link>
+        <h3>Clipped by:</h3>
+        <router-link :to="`/users/${post.user_id}`">
+          {{post.user.first_name}} {{post.user.last_name}}
+        </router-link>
+        <p>Location: {{post.location}}</p>
+        <p>Tags:</p>
+        <div v-for="tag in post.tags">
+          {{tag.name}}
+        </div>
+        <p>Created {{relativeDate(post.created_at)}}</p> <br> <br>
       </div>
-      <p>Created {{relativeDate(post.created_at)}}</p> <br> <br>
     </div> <br>
   </div>
 </template>

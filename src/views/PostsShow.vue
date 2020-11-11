@@ -2,6 +2,9 @@
   <div class="posts-show">
     <img :src="post.image_url" alt="" class="image-fit">
     <h1>{{post.plant_type}}</h1>
+    <div v-if="post.offer_accepted">
+      <h3>An offer has been accepted</h3>
+    </div>
     <h3>Clipped by:</h3>
     <router-link :to="`/users/${post.user_id}`">
       <h3>{{post.user.first_name}} {{post.user.last_name}}</h3>
@@ -25,14 +28,19 @@
       <router-link :to="`/users/${offer.user_id}`">
         <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
       </router-link>
+      <div v-if="offer.accepted == true">
+        <h3>This offer has been accepted</h3> 
+      </div>
       <img :src="offer.image_url" alt="" class="image-fit">
       <p>Message: {{offer.message}}</p>
       <p>Created {{relativeDate(offer.created_at)}}</p>
       <div v-if="$parent.getUserId() == post.user_id">
-        <button v-on:click="offerAcceptToggle = offer.id">
+        <div v-if="offer.accepted == false">
+          <button v-on:click="updateOfferAccept(offer)">
           Accept Offer
         </button>
-        <div v-if="offerAcceptToggle === offer.id">
+        </div>
+        <div v-if="offer.accepted == true">
           <p>{{offer.user.first_name}} {{offer.user.last_name}}'s email: {{offer.user.email}}</p>
         </div>
       </div>
@@ -98,7 +106,6 @@ export default {
         user: {}
       },
       errors: [],
-      offerAcceptToggle: null,
       offerEditAuthentication: null,
       message: "",
       image: ""
@@ -108,6 +115,14 @@ export default {
     this.showPost();
   },
   methods: {
+    updateOfferAccept: function(offer) {
+      var formData = new FormData();
+      var index = this.post.offers.indexOf(offer);
+      formData.append("accepted", true);
+      axios.patch(`/api/offers/${offer.id}`, formData).then(response => {
+        this.post.offers[index] = (response.data);
+      });
+    },
     relativeDate: function (date) {
       return moment(date).fromNow();
     },

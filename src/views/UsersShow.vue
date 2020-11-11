@@ -15,6 +15,9 @@
       <router-link :to="`/posts/${post.id}`">
        <h3>{{post.plant_type}}</h3>
       </router-link>
+      <div v-if="post.offer_accepted">
+        <h3>An offer has been accepted</h3>
+      </div>
       <p>Trade for: {{post.trade_for}}</p>
       <p>Description: {{post.description}}</p>
       <p>Loaction: {{post.location}}</p>
@@ -35,6 +38,9 @@
       <router-link :to="`/posts/${offer.post_id}`">
         <h3>Posted on: {{offer.post_title}}</h3>
       </router-link>
+      <div v-if="offer.accepted == true">
+        <h3>This offer has been accepted</h3> 
+      </div>
       <img :src="offer.image_url" alt="" class="image-fit">
       <p>Message: {{offer.message}}</p>
       <p>Created {{relativeDate(offer.created_at)}}</p>
