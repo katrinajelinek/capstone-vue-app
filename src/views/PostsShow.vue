@@ -28,19 +28,22 @@
       <router-link :to="`/users/${offer.user_id}`">
         <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
       </router-link>
-      <div v-if="offer.accepted == true">
+      <p>Offer Accepted Status: {{offer.accepted}}</p>
+      <div v-if="offer.accepted === true">
         <h3>This offer has been accepted</h3> 
       </div>
       <img :src="offer.image_url" alt="" class="image-fit">
       <p>Message: {{offer.message}}</p>
       <p>Created {{relativeDate(offer.created_at)}}</p>
+
+      
       <div v-if="$parent.getUserId() == post.user_id">
-        <div v-if="offer.accepted == false">
+        <div v-if="!post.offer_accepted">
           <button v-on:click="updateOfferAccept(offer)">
-          Accept Offer
-        </button>
+            Accept Offer
+          </button>
         </div>
-        <div v-if="offer.accepted == true">
+        <div v-if="offer.accepted === true">
           <p>{{offer.user.first_name}} {{offer.user.last_name}}'s email: {{offer.user.email}}</p>
         </div>
       </div>
@@ -48,6 +51,7 @@
         <button v-on:click="offerEditAuthentication = offer.id">
           Edit
         </button>
+
 
 <!-- update offer -->
         <div v-if="offerEditAuthentication === offer.id">
@@ -117,10 +121,11 @@ export default {
   methods: {
     updateOfferAccept: function(offer) {
       var formData = new FormData();
-      var index = this.post.offers.indexOf(offer);
       formData.append("accepted", true);
       axios.patch(`/api/offers/${offer.id}`, formData).then(response => {
-        this.post.offers[index] = (response.data);
+        console.log(response.data);
+        offer.accepted = true;
+        this.post.offer_accepted = true;
       });
     },
     relativeDate: function (date) {

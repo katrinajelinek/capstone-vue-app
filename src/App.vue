@@ -37,8 +37,8 @@
 }
 
 .image-fit{
-  height: 500px;
-  width: 500px;
+  height: 350px;
+  width: 350px;
   object-fit: cover;
 }
 </style>
