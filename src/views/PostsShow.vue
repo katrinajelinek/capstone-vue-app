@@ -29,7 +29,6 @@
       <router-link :to="`/users/${offer.user_id}`">
         <h3>{{offer.user.first_name}} {{offer.user.last_name}}</h3>
       </router-link>
-      <p>Offer Accepted Status: {{offer.accepted}}</p>
       <div v-if="offer.accepted === true">
         <h3>This offer has been accepted</h3> 
       </div>
@@ -91,7 +90,7 @@
       </div>
       <div>
         <label>Image:</label> 
-        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
+        <input id="imageInput" type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
       </div>
       <input type="submit" class="btn btn-primary" value="Submit">
     </form>
@@ -162,7 +161,7 @@ export default {
         .then((response) => {
           this.post.offers.push(response.data);
           this.message = "";
-          this.image = "";
+          document.getElementById("imageInput").value = "";
         })
         .catch(error => {
           this.errors = error.response.data.errors;
