@@ -1,5 +1,6 @@
 <template>
   <div class="posts-show">
+<!-- post info -->
     <img :src="post.image_url" alt="" class="image-fit">
     <h1>{{post.plant_type}}</h1>
     <div v-if="post.offer_accepted">
@@ -36,7 +37,8 @@
       <p>Message: {{offer.message}}</p>
       <p>Created {{relativeDate(offer.created_at)}}</p>
 
-      
+
+<!-- accept and edit offer buttons-->
       <div v-if="$parent.getUserId() == post.user_id">
         <div v-if="!post.offer_accepted">
           <button v-on:click="updateOfferAccept(offer)">
@@ -159,6 +161,8 @@ export default {
         .post("/api/offers", formData)
         .then((response) => {
           this.post.offers.push(response.data);
+          this.message = "";
+          this.image = "";
         })
         .catch(error => {
           this.errors = error.response.data.errors;

@@ -30,6 +30,8 @@
     <button v-on:click="destroyPost()">
       Delete
     </button>
+
+<!-- tags multiselect -->
     <div>
       <label class="typo__label">Select Tags</label>
       <multiselect v-model="values" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">

@@ -1,9 +1,12 @@
 <template>
   <div class="posts-index">
+<!-- search -->
     <input type="text" v-model="plantTypeFilter" placeholder="Search by Clipping" list="plantTypes"> <br>
     <datalist id="plantTypes">
       <option v-for="post in posts">{{post.plant_type}}</option>
     </datalist> <br>
+
+<!-- filter by tags multiselect -->
     <div>
       <label class="typo__label">Or search by tags:</label>
       <multiselect v-model="tagsFilter" :options="tags" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Tags" label="name" track-by="name" :preselect-first="true">
@@ -15,6 +18,7 @@
       Post a clipping
     </router-link> <br> <br>
 
+<!-- all posts -->
     <div v-for="post in orderBy(filterBy(filteredPostsByTags, plantTypeFilter, 'plant_type'), sortAttribute, -1)">
       <div v-if="post.offer_accepted == null">
         <img :src="post.image_url" alt="" class="image-fit">
