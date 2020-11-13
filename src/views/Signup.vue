@@ -1,36 +1,103 @@
 <template>
   <div class="signup">
-    <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <div class="form-group">
-        <label>First name:</label> 
-        <input type="text" class="form-control" v-model="firstName">
+    <div class="replay-box">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="container">
+            <h3>Signup</h3>
+            <ul>
+              <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            </ul>
+            <form
+              id="comment-form"
+              class="row"
+              name="comment-form"
+              method="post"
+              v-on:submit.prevent="submit()"
+            >
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="First name"
+                    v-model="firstName"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Last name"
+                    v-model="lastName"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Email"
+                    v-model="email"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="file"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Uploda an image"
+                    v-on:change="setFile($event)"
+                    ref="fileInput"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Password"
+                    v-model="password"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Password Confirmation"
+                    v-model="passwordConfirmation"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12 form-group">
+                <button type="submit" class="btn btn-primary pull-right">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Last name:</label> 
-        <input type="text" class="form-control" v-model="lastName">
-      </div>
-      <div class="form-group">
-        <label>Email:</label>
-        <input type="email" class="form-control" v-model="email">
-      </div>
-      <div class="form-group">
-        <label>Password:</label>
-        <input type="password" class="form-control" v-model="password">
-      </div>
-      <div class="form-group">
-        <label>Password confirmation:</label>
-        <input type="password" class="form-control" v-model="passwordConfirmation">
-      </div>
-      <div class="form-group">
-        <label>Image:</label> 
-        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
-      </div>
-      <input type="submit" class="btn btn-primary" value="Submit">
-    </form>
+    </div>
   </div>
 </template>
 
@@ -46,7 +113,7 @@ export default {
       password: "",
       passwordConfirmation: "",
       image: "",
-      errors: []
+      errors: [],
     };
   },
   methods: {
@@ -67,13 +134,13 @@ export default {
       }
       axios
         .post("/api/users", formData)
-        .then(response => {
+        .then((response) => {
           this.$router.push("/login");
         })
-        .catch(error => {
+        .catch((error) => {
           this.errors = error.response.data.errors;
         });
-    }
-  }
+    },
+  },
 };
 </script>
