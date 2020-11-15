@@ -97,7 +97,7 @@
                     <div v-if="$parent.getUserId() == offer.user_id">
                       <button
                         v-on:click="offerEditAuthentication = offer.id"
-                        class="btn btn-primary pull-left"
+                        class="btn btn-primary pull-right"
                       >
                         Edit Offer
                       </button>
