@@ -4,12 +4,10 @@
       <div class="container padding-top">
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1>Our Blog</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              ac augue at erat hendrerit dictum. Praesent porta, purus eget
-              sagittis imperdiet.
-            </p>
+            <h1>{{ post.plant_type }}</h1>
+            <div v-if="post.offer_accepted">
+              <h3>An offer has been accepted</h3>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -53,6 +51,9 @@
                 <ul class="media-list">
                   <li class="media" v-for="offer in post.offers">
                     <div class="post-comment">
+                      <div v-if="offer.accepted === true">
+                        <h3>Accepted</h3>
+                      </div>
                       <router-link
                         class="pull-left"
                         :to="`/users/${offer.user_id}`"
@@ -102,12 +103,75 @@
                         Edit Offer
                       </button>
                     </div>
+                    <!--/offersupdate-area-->
+                    <div
+                      v-if="offerEditAuthentication === offer.id"
+                      class="replay-box"
+                    >
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h3>Edit Offer</h3>
+                          <ul>
+                            <li class="text-danger" v-for="error in errors">
+                              {{ error }}
+                            </li>
+                          </ul>
+                          <form
+                            v-on:submit.prevent="updateOffer(offer)"
+                            id="comment-form"
+                            class="row"
+                            name="comment-form"
+                            method="post"
+                          >
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <textarea
+                                  name="message"
+                                  id="message"
+                                  required="required"
+                                  class="form-control"
+                                  rows="7"
+                                  placeholder="Your Message"
+                                  v-model="offer.message"
+                                ></textarea>
+                              </div>
+                            </div>
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <input
+                                  type="file"
+                                  name="name"
+                                  class="form-control"
+                                  v-on:change="setFile($event)"
+                                  ref="fileInput"
+                                />
+                              </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                              <button
+                                type="submit"
+                                class="btn btn-primary pull-right"
+                              >
+                                Update Offer
+                              </button>
+                              <button
+                                class="btn btn-primary pull-right"
+                                v-on:click="destroyOffer(offer)"
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <!--/Repaly Box-->
                   </li>
                   <br />
                   <br />
                 </ul>
               </div>
-              <!--/comments-area-->
+              <!--/offers-area-->
               <div class="replay-box">
                 <div class="row">
                   <div class="col-sm-12">
@@ -171,10 +235,10 @@
 
     <!-- post info -->
     <!-- <img :src="post.image_url" alt="" class="image-fit" /> -->
-    <h1>{{ post.plant_type }}</h1>
+    <!-- <h1>{{ post.plant_type }}</h1>
     <div v-if="post.offer_accepted">
       <h3>An offer has been accepted</h3>
-    </div>
+    </div> -->
     <!-- <h3>Clipped by:</h3>
     <router-link :to="`/users/${post.user_id}`">
       <h3>{{ post.user.first_name }} {{ post.user.last_name }}</h3>
@@ -188,24 +252,26 @@
     </div>
     <p>Created {{ relativeDate(post.created_at) }}</p> -->
     <div v-if="$parent.getUserId() == post.user_id">
-      <router-link :to="`/posts/${post.id}/edit`">Edit</router-link>
+      <router-link :to="`/posts/${post.id}/edit`"
+        >Edit your clipping</router-link
+      >
     </div>
 
     <!-- offers index -->
-    <h2>Offers</h2>
-    <div v-for="offer in post.offers">
-      <!-- <router-link :to="`/users/${offer.user_id}`">
+    <!-- <h2>Offers</h2>
+    <div v-for="offer in post.offers"> -->
+    <!-- <router-link :to="`/users/${offer.user_id}`">
         <h3>{{ offer.user.first_name }} {{ offer.user.last_name }}</h3>
       </router-link> -->
-      <div v-if="offer.accepted === true">
-        <h3>This offer has been accepted</h3>
-      </div>
-      <!-- <img :src="offer.image_url" alt="" class="image-fit" /> -->
-      <!-- <p>Message: {{ offer.message }}</p>
+    <!-- <div v-if="offer.accepted === true">
+        <h3>Accepted</h3>
+      </div> -->
+    <!-- <img :src="offer.image_url" alt="" class="image-fit" /> -->
+    <!-- <p>Message: {{ offer.message }}</p>
       <p>Created {{ relativeDate(offer.created_at) }}</p> -->
 
-      <!-- accept and edit offer buttons-->
-      <!-- <div v-if="$parent.getUserId() == post.user_id">
+    <!-- accept and edit offer buttons-->
+    <!-- <div v-if="$parent.getUserId() == post.user_id">
         <div v-if="!post.offer_accepted">
           <button v-on:click="updateOfferAccept(offer)">
             Accept Offer
@@ -223,33 +289,33 @@
           Edit
         </button> -->
 
-      <!-- update offer -->
-      <div v-if="offerEditAuthentication === offer.id">
-        <form v-on:submit.prevent="updateOffer(offer)">
-          <h2>Update Offer:</h2>
-          <ul>
-            <li class="text-danger" v-for="error in errors">{{ error }}</li>
-          </ul>
-          <div class="form-group">
-            <label>Message:</label>
-            <input type="text" class="form-control" v-model="offer.message" />
-          </div>
-          <div>
-            <label>Image:</label>
-            <input
-              type="file"
-              class="form-control"
-              v-on:change="setFile($event)"
-              ref="fileInput"
-            />
-          </div>
-          <input type="submit" class="btn btn-primary" value="Update" />
-        </form>
-      </div>
-      <button v-on:click="destroyOffer(offer)">
-        Delete
-      </button>
-    </div>
+    <!-- update offer -->
+    <!-- <div v-if="offerEditAuthentication === offer.id"> 
+      <form v-on:submit.prevent="updateOffer(offer)">
+        <h2>Update Offer:</h2>
+        <ul>
+          <li class="text-danger" v-for="error in errors">{{ error }}</li>
+        </ul>
+        <div class="form-group">
+          <label>Message:</label>
+          <input type="text" class="form-control" v-model="offer.message" />
+        </div>
+        <div>
+          <label>Image:</label>
+          <input
+            type="file"
+            class="form-control"
+            v-on:change="setFile($event)"
+            ref="fileInput"
+          />
+        </div>
+        <input type="submit" class="btn btn-primary" value="Update" />
+      </form>
+    </div> -->
+    <!-- <button v-on:click="destroyOffer(offer)">
+      Delete
+    </button> -->
+    <!-- </div> -->
 
     <!-- new offer -->
     <!-- <form v-on:submit.prevent="createOffer()">
