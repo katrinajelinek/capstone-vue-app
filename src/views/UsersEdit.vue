@@ -1,53 +1,213 @@
 <template>
   <div class="users-edit">
-    <form v-on:submit.prevent="updateUser(user)">
+    <div class="replay-box">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="container">
+            <h3>Edit Clipping</h3>
+            <ul>
+              <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            </ul>
+            <form
+              id="comment-form"
+              class="row"
+              name="comment-form"
+              method="post"
+              v-on:submit.prevent="updateUser()"
+            >
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="First name"
+                    v-model="user.first_name"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Last name"
+                    v-model="user.last_name"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Email"
+                    v-model="user.email"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="file"
+                    name="name"
+                    class="form-control"
+                    placeholder="Uploda an image"
+                    v-on:change="setFile($event)"
+                    ref="fileInput"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Password"
+                    v-model="password"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12 form-group">
+                <button type="submit" class="btn btn-primary pull-right">
+                  Edit
+                </button>
+                <button
+                  v-on:click="passwordUpdateToggle = !passwordUpdateToggle"
+                  type="submit"
+                  class="btn btn-primary pull-left"
+                >
+                  Update Password
+                </button>
+                <button
+                  v-on:click="destroyUser()"
+                  type="submit"
+                  class="btn btn-primary pull-left"
+                >
+                  Delete
+                </button>
+              </div>
+            </form>
+            <form
+              v-if="passwordUpdateToggle === true"
+              id="comment-form"
+              class="row"
+              name="comment-form"
+              method="post"
+              v-on:submit.prevent="updateUser()"
+            >
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Old Password"
+                    v-model="old_password"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="New Password"
+                    v-model="password"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="Password Confirmation"
+                    v-model="password_confirmation"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12 form-group">
+                <button type="submit" class="btn btn-primary pull-right">
+                  Update Password
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <form v-on:submit.prevent="updateUser(user)">
       <h1>Edit Clipping</h1>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
       </ul>
       <div class="form-group">
-        <label>First Name:</label> 
-        <input type="text" class="form-control" v-model="user.first_name">
+        <label>First Name:</label>
+        <input type="text" class="form-control" v-model="user.first_name" />
       </div>
       <div class="form-group">
-        <label>Last Name:</label> 
-        <input type="text" class="form-control" v-model="user.last_name">
+        <label>Last Name:</label>
+        <input type="text" class="form-control" v-model="user.last_name" />
       </div>
       <div class="form-group">
-        <label>Email:</label> 
-        <input type="text" class="form-control" v-model="user.email">
+        <label>Email:</label>
+        <input type="text" class="form-control" v-model="user.email" />
       </div>
       <div class="form-group">
-        <label>Image:</label> 
-        <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
-      </div>
-      <!-- <div class="form-group">
+        <label>Image:</label>
+        <input
+          type="file"
+          class="form-control"
+          v-on:change="setFile($event)"
+          ref="fileInput"
+        />
+      </div> -->
+  <!-- <div class="form-group">
         <label>To change password, please enter your password:</label> 
         <input type="password" class="form-control" v-model="user.password">
       </div> -->
-      <input type="submit" class="btn btn-primary" value="Update">
+  <!-- <input type="submit" class="btn btn-primary" value="Update" />
     </form>
     <button v-on:click="passwordUpdateToggle = !passwordUpdateToggle">
-        Update Password
-      </button>
-      <div v-if="passwordUpdateToggle === true">
-        <div class="form-group">
-          <label>Old Password</label>
-          <input type="password" class="form-control" v-model="old_password">
-        </div>
-        <div class="form-group">
-          <label>New Password</label>
-          <input type="password" class="form-control" v-model="password">
-        </div>
-        <div class="form-group">
-          <label>Password Confirmation</label>
-          <input type="password" class="form-control" v-model="password_confirmation">
-        </div>
+      Update Password
+    </button> -->
+  <!-- <div v-if="passwordUpdateToggle === true">
+      <div class="form-group">
+        <label>Old Password</label>
+        <input type="password" class="form-control" v-model="old_password" />
       </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" class="form-control" v-model="password" />
+      </div>
+      <div class="form-group">
+        <label>Password Confirmation</label>
+        <input
+          type="password"
+          class="form-control"
+          v-model="password_confirmation"
+        />
+      </div>
+    </div>
     <button v-on:click="destroyUser()">
-        Delete
-      </button>
-  </div>
+      Delete
+    </button>
+  </div> -->
 </template>
 
 <script>
@@ -61,11 +221,11 @@ export default {
       old_password: "",
       password: "",
       password_confirmation: "",
-      passwordUpdateToggle: false
+      passwordUpdateToggle: false,
     };
   },
   created: function() {
-    axios.get(`/api/users/${this.$route.params.id}`).then(response => {
+    axios.get(`/api/users/${this.$route.params.id}`).then((response) => {
       console.log(response.data);
       this.user = response.data;
     });
@@ -93,18 +253,18 @@ export default {
         .then((response) => {
           this.$router.push(`/users/${this.user.id}`);
         })
-        .catch(error => {
+        .catch((error) => {
           this.errors = error.response.data.errors;
         });
     },
-    destroyUser: function () {
-      axios.delete(`/api/users/${this.user.id}`).then(response => {
+    destroyUser: function() {
+      axios.delete(`/api/users/${this.user.id}`).then((response) => {
         console.log("Success", response.data);
         localStorage.removeItem("jwt");
         localStorage.removeItem("user_id");
         this.$router.push("/posts");
       });
-    }
-  }
+    },
+  },
 };
 </script>
