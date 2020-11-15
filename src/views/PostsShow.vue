@@ -5,6 +5,11 @@
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ post.plant_type }}</h1>
+            <div v-if="$parent.getUserId() == post.user_id">
+              <router-link :to="`/posts/${post.id}/edit`"
+                >Edit your clipping</router-link
+              >
+            </div>
             <div v-if="post.offer_accepted">
               <h3>An offer has been accepted</h3>
             </div>
@@ -251,11 +256,11 @@
       <p>{{ tag.name }}</p>
     </div>
     <p>Created {{ relativeDate(post.created_at) }}</p> -->
-    <div v-if="$parent.getUserId() == post.user_id">
+    <!-- <div v-if="$parent.getUserId() == post.user_id">
       <router-link :to="`/posts/${post.id}/edit`"
         >Edit your clipping</router-link
       >
-    </div>
+    </div> -->
 
     <!-- offers index -->
     <!-- <h2>Offers</h2>
