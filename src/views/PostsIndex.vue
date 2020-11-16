@@ -76,7 +76,9 @@
                         </router-link>
                         <h3>Clipped by:</h3>
                         <p>
-                          {{ post.user.first_name }} {{ post.user.last_name }}
+                          <router-link :to="`/users/${post.user_id}`">
+                            {{ post.user.first_name }} {{ post.user.last_name }}
+                          </router-link>
                         </p>
                         <p>Location: {{ post.location }}</p>
                         <p>Tags:</p>
