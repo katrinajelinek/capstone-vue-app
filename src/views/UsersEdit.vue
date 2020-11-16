@@ -69,7 +69,6 @@
                     type="password"
                     name="name"
                     class="form-control"
-                    required="required"
                     placeholder="Password"
                     v-model="password"
                   />
@@ -80,18 +79,18 @@
                   Edit
                 </button>
                 <button
-                  v-on:click="passwordUpdateToggle = !passwordUpdateToggle"
-                  type="submit"
-                  class="btn btn-primary pull-left"
-                >
-                  Update Password
-                </button>
-                <button
                   v-on:click="destroyUser()"
                   type="submit"
-                  class="btn btn-primary pull-left"
+                  class="btn btn-primary pull-right"
                 >
                   Delete
+                </button>
+                <button
+                  v-on:click="passwordUpdateToggle = !passwordUpdateToggle"
+                  type="submit"
+                  class="btn btn-primary pull-right"
+                >
+                  Change Password
                 </button>
               </div>
             </form>
@@ -209,6 +208,13 @@
     </button>
   </div> -->
 </template>
+
+<style scoped>
+.contact-wrap .btn.btn-primary,
+#comment-form .btn.btn-primary {
+  margin-left: 15px;
+}
+</style>
 
 <script>
 import axios from "axios";
