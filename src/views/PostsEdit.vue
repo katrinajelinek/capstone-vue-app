@@ -106,14 +106,14 @@
                   </div>
                 </div>
                 <div class="col-sm-12 form-group">
-                  <button type="submit" class="btn btn-primary pull-right">
-                    Edit
-                  </button>
                   <button
                     class="btn btn-primary pull-right"
                     v-on:click="destroyPost()"
                   >
                     Delete
+                  </button>
+                  <button type="submit" class="btn btn-primary pull-right">
+                    Edit
                   </button>
                 </div>
               </form>
@@ -185,6 +185,13 @@
     </div> -->
   </div>
 </template>
+
+<style scoped>
+.contact-wrap .btn.btn-primary,
+#comment-form .btn.btn-primary {
+  margin-left: 15px;
+}
+</style>
 
 <script>
 import axios from "axios";
