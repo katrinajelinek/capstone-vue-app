@@ -220,7 +220,7 @@ export default {
       axios
         .post("/api/posts", formData)
         .then((response) => {
-          this.$router.push("/posts");
+          this.$router.push("/");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

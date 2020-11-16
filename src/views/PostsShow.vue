@@ -400,7 +400,7 @@ export default {
     destroyPost: function() {
       axios.delete(`/api/posts/${this.post.id}`).then((response) => {
         console.log("Success", response.data);
-        this.$router.push("/posts");
+        this.$router.push("/");
       });
     },
     createOffer: function() {

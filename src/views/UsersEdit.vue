@@ -268,7 +268,7 @@ export default {
         console.log("Success", response.data);
         localStorage.removeItem("jwt");
         localStorage.removeItem("user_id");
-        this.$router.push("/posts");
+        this.$router.push("/");
       });
     },
   },

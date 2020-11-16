@@ -31,7 +31,7 @@
             <div class="col-sm-9">
               <nav class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
-                  <li><router-link to="/posts">Clippings</router-link></li>
+                  <li><router-link to="/">Clippings</router-link></li>
                   <li>
                     <router-link to="/posts/new">New Clipping</router-link>
                   </li>
@@ -152,7 +152,7 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-6">
-              <ul class="footer-menu list-inline">
+              <!-- <ul class="footer-menu list-inline">
                 <li><router-link to="/posts">Clippings</router-link></li>
                 <li>
                   <router-link to="/posts/new">New Clipping</router-link>
@@ -171,7 +171,7 @@
                     >Profile</router-link
                   >
                 </li>
-              </ul>
+              </ul> -->
             </div>
 
             <div class="col-sm-6">

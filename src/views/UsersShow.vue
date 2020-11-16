@@ -254,7 +254,7 @@ export default {
     destroyUser: function() {
       axios.delete(`/api/users/${this.user.id}`).then((response) => {
         console.log("Success", response.data);
-        this.$router.push("/posts");
+        this.$router.push("/");
       });
     },
     updateOffer: function(offer) {

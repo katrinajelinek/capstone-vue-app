@@ -1,6 +1,5 @@
 <template>
-  <div class="logout">
-  </div>
+  <div class="logout"></div>
 </template>
 
 <script>
@@ -11,7 +10,7 @@ export default {
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("jwt");
     localStorage.removeItem("user_id");
-    this.$router.push("/posts");
-  }
+    this.$router.push("/");
+  },
 };
 </script>
