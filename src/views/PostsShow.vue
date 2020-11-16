@@ -54,7 +54,10 @@
               <div class="comments-area">
                 <h2 class="comments-heading">Offers</h2>
                 <ul class="media-list">
-                  <li class="media" v-for="offer in post.offers">
+                  <li
+                    class="media"
+                    v-for="offer in orderBy(post.offers, 'created_at', -1)"
+                  >
                     <div class="post-comment">
                       <div v-if="offer.accepted === true">
                         <h3>Accepted</h3>
@@ -352,8 +355,10 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       post: {
