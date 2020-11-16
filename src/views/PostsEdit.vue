@@ -106,14 +106,14 @@
                   </div>
                 </div>
                 <div class="col-sm-12 form-group">
+                  <button type="submit" class="btn btn-primary pull-right">
+                    Edit
+                  </button>
                   <button
                     class="btn btn-primary pull-right"
                     v-on:click="destroyPost()"
                   >
                     Delete
-                  </button>
-                  <button type="submit" class="btn btn-primary pull-right">
-                    Edit
                   </button>
                 </div>
               </form>
