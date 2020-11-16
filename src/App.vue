@@ -70,6 +70,22 @@
         </div>
       </div>
     </header>
+    <div
+      v-if="flashMessage"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      {{ flashMessage }}
+      <button
+        type="button"
+        class="close"
+        v-on:click="flashMessage = ''"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <!--/#navigation-->
     <!--/#navigation-->
     <!-- <header id="navigation">
@@ -196,7 +212,9 @@ import axios from "axios";
 
 export default {
   data: function() {
-    return {};
+    return {
+      flashMessage: "",
+    };
   },
   methods: {
     isLoggedIn: function() {
