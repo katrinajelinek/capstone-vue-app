@@ -17,15 +17,13 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
-                  <h1>
-                    <img
-                      class="img-responsive"
-                      src="/images/logo.png"
-                      alt="logo"
-                    />
-                  </h1>
-                </a>
+                <h1>
+                  <img
+                    class="img-responsive"
+                    src="/images/logo.png"
+                    alt="logo"
+                  />
+                </h1>
               </div>
             </div>
             <div class="col-sm-9">

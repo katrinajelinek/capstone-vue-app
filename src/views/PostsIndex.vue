@@ -45,7 +45,7 @@
       <div class="container padding-top padding-bottom">
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1>Clipsy</h1>
+            <h1>Welcome to Clipsy</h1>
             <p>
               Where plant friends can trade clippings and seeds with their
               community
@@ -65,7 +65,16 @@
             <div class="padding-top padding-bottom padding-left">
               <div class="single-project big-project">
                 <div class="portfolio-item">
-                  <img class="img-responsive" :src="post.image_url" alt="" />
+                  <div v-if="post.image_url">
+                    <img class="img-responsive" :src="post.image_url" alt="" />
+                  </div>
+                  <div v-else>
+                    <img
+                      class="img-responsive"
+                      src="images/default-post-picture.jpg"
+                      alt=""
+                    />
+                  </div>
                   <div class="overlay">
                     <div class="overlay-content">
                       <!-- <span
@@ -157,6 +166,7 @@ export default {
       tags: [],
       tagsFilter: [],
       plantTypeFilter: "",
+      default: "/public/images/default-post-picture.jpg",
     };
   },
   created: function() {
