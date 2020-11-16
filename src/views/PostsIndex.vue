@@ -13,30 +13,28 @@
     </datalist> -->
 
     <!-- filter by tags multiselect -->
-    <div class="row section-title text-center">
-      <div class="col-sm-8 col-sm-offset-2">
-        <div>
-          <multiselect
-            v-model="tagsFilter"
-            :options="tags"
-            :multiple="true"
-            :close-on-select="false"
-            :clear-on-select="false"
-            :preserve-search="true"
-            placeholder="Search by Tags"
-            label="name"
-            track-by="name"
-            :preselect-first="true"
+    <div class="col-sm-8 col-sm-offset-2">
+      <div>
+        <multiselect
+          v-model="tagsFilter"
+          :options="tags"
+          :multiple="true"
+          :close-on-select="false"
+          :clear-on-select="false"
+          :preserve-search="true"
+          placeholder="Search by Tags"
+          label="name"
+          track-by="name"
+          :preselect-first="true"
+        >
+          <template slot="selection" slot-scope="{ values, isOpen }"
+            ><span
+              class="multiselect__single"
+              v-if="values.length &amp;&amp; !isOpen"
+              >{{ values.length }} tags selected</span
+            ></template
           >
-            <template slot="selection" slot-scope="{ values, isOpen }"
-              ><span
-                class="multiselect__single"
-                v-if="values.length &amp;&amp; !isOpen"
-                >{{ values.length }} tags selected</span
-              ></template
-            >
-          </multiselect>
-        </div>
+        </multiselect>
       </div>
     </div>
 

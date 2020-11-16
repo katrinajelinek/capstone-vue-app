@@ -20,7 +20,16 @@
             <div class="post">
               <div class="col-sm-12">
                 <div class="entry-thumbnail">
-                  <img class="img-responsive" :src="post.image_url" alt="" />
+                  <div v-if="post.image_url">
+                    <img class="img-responsive" :src="post.image_url" alt="" />
+                  </div>
+                  <div v-else>
+                    <img
+                      class="img-responsive"
+                      src="/images/default-post-picture.jpg"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
               <div class="post-content">
