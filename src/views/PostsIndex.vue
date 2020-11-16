@@ -133,6 +133,9 @@
 .portfolio-item .overlay .overlay-content {
   margin-top: -200px;
 }
+.col-sm-5 {
+  width: 50%;
+}
 </style>
 
 <script>
