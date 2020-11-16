@@ -852,17 +852,6 @@ ul.filter li a.active {
   opacity: 1;
 }
 
-/* .portfolio-item .overlay .overlay-content {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 30px;
-  margin-top: -85px;
-  height: 100%;
-} */
-
 .portfolio-item .overlay .overlay-content {
   position: absolute;
   top: 50%;
@@ -870,7 +859,7 @@ ul.filter li a.active {
   width: 100%;
   text-align: center;
   padding: 30px;
-  margin-top: -200px;
+  margin-top: -85px;
   height: 100%;
 }
 

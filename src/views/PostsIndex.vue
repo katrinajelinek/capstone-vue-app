@@ -13,40 +13,42 @@
     </datalist> -->
 
     <!-- filter by tags multiselect -->
-    <!-- <div>
-      <label class="typo__label">Or search by tags:</label>
-      <multiselect
-        v-model="tagsFilter"
-        :options="tags"
-        :multiple="true"
-        :close-on-select="false"
-        :clear-on-select="false"
-        :preserve-search="true"
-        placeholder="Select Tags"
-        label="name"
-        track-by="name"
-        :preselect-first="true"
-      >
-        <template slot="selection" slot-scope="{ values, isOpen }"
-          ><span
-            class="multiselect__single"
-            v-if="values.length &amp;&amp; !isOpen"
-            >{{ values.length }} tags selected</span
-          ></template
-        >
-      </multiselect>
-    </div> -->
+    <div class="row section-title text-center">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div>
+          <multiselect
+            v-model="tagsFilter"
+            :options="tags"
+            :multiple="true"
+            :close-on-select="false"
+            :clear-on-select="false"
+            :preserve-search="true"
+            placeholder="Search by Tags"
+            label="name"
+            track-by="name"
+            :preselect-first="true"
+          >
+            <template slot="selection" slot-scope="{ values, isOpen }"
+              ><span
+                class="multiselect__single"
+                v-if="values.length &amp;&amp; !isOpen"
+                >{{ values.length }} tags selected</span
+              ></template
+            >
+          </multiselect>
+        </div>
+      </div>
+    </div>
 
     <!-- Portfolio Section -->
     <div id="portfolio">
       <div class="container padding-top padding-bottom">
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1><span>Recent</span> Portfolio</h1>
+            <h1>Clipsy</h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-              ac augue at erat hendrerit dictum. Praesent porta, purus eget
-              sagittis imperdiet.
+              Where plant friends can trade clippings and seeds with their
+              community
             </p>
           </div>
         </div>
@@ -127,7 +129,11 @@
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.portfolio-item .overlay .overlay-content {
+  margin-top: -200px;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -138,7 +144,7 @@ import moment from "moment";
 export default {
   mixins: [Vue2Filters.mixin],
   components: {
-    // Multiselect,
+    Multiselect,
   },
   data: function() {
     return {
