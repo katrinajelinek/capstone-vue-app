@@ -143,7 +143,7 @@ a.read-more span {
 }
 
 #sub-page #navigation {
-  background: url("https://images.unsplash.com/photo-1512428442882-a71471996d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=642&q=80");
+  background: url(../../images/nav-bar-picture.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
