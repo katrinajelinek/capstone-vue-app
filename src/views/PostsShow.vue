@@ -5,13 +5,15 @@
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ post.plant_type }}</h1>
-            <div v-if="$parent.getUserId() == post.user_id">
-              <router-link :to="`/posts/${post.id}/edit`"
-                >Edit your clipping</router-link
-              >
-            </div>
+            <h3>
+              Clipped by:
+              <router-link :to="`/users/${post.user_id}`">
+                <p>{{ post.user.first_name }} {{ post.user.last_name }}</p>
+              </router-link>
+            </h3>
+            <br />
             <div v-if="post.offer_accepted">
-              <h3>An offer has been accepted</h3>
+              <h5>An offer has been accepted</h5>
             </div>
           </div>
         </div>
@@ -34,12 +36,11 @@
               </div>
               <div class="post-content">
                 <h2 class="entry-title">
-                  <h1>Clipped by:</h1>
-                  <router-link :to="`/users/${post.user_id}`">
-                    <h3>
-                      {{ post.user.first_name }} {{ post.user.last_name }}
-                    </h3>
-                  </router-link>
+                  <div v-if="$parent.getUserId() == post.user_id">
+                    <router-link :to="`/posts/${post.id}/edit`"
+                      >Edit your clipping</router-link
+                    >
+                  </div>
                 </h2>
                 <div class="entry-summary">
                   <h3>Trade for: {{ post.trade_for }}</h3>
