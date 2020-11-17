@@ -344,7 +344,7 @@ export default {
         });
     },
     destroyOffer: function(offer) {
-      if (confirm("Are you sure you want to delete your account?")) {
+      if (confirm("Are you sure you want to delete your offer?")) {
         var index = this.post.offers.indexOf(offer);
         axios.delete(`/api/offers/${offer.id}`).then((response) => {
           console.log("Success", response.data);
