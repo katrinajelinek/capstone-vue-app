@@ -68,11 +68,7 @@
         </div>
       </div>
     </header>
-    <div
-      v-if="flashMessage"
-      class="alert alert-success alert-dismissible fade show"
-      role="alert"
-    >
+    <div v-if="flashMessage" class="alert alert-success" role="alert">
       {{ flashMessage }}
       <button
         type="button"
