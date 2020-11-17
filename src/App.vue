@@ -52,17 +52,6 @@
               <div class="topbar-icons">
                 <span><i class="fa fa-search"></i></span>
               </div>
-              <div class="search">
-                <form role="form">
-                  <input
-                    type="text"
-                    class="search-form"
-                    autocomplete="off"
-                    placeholder="Write something and press enter"
-                  />
-                  <span class="search-close"><i class="fa fa-times"></i></span>
-                </form>
-              </div>
             </div>
           </div>
         </div>
