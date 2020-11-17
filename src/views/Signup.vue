@@ -114,6 +114,7 @@ export default {
       passwordConfirmation: "",
       image: "",
       errors: [],
+      flashMessage: "",
     };
   },
   methods: {
@@ -135,6 +136,8 @@ export default {
       axios
         .post("/api/users", formData)
         .then((response) => {
+          this.$parent.flashMessage =
+            "Your account has been successfully created!";
           this.$router.push("/login");
         })
         .catch((error) => {
