@@ -271,6 +271,7 @@ export default {
       offerEditAuthentication: null,
       message: "",
       image: "",
+      flashMessage: "",
     };
   },
   created: function() {
@@ -343,11 +344,15 @@ export default {
         });
     },
     destroyOffer: function(offer) {
-      var index = this.post.offers.indexOf(offer);
-      axios.delete(`/api/offers/${offer.id}`).then((response) => {
-        console.log("Success", response.data);
-        this.post.offers.splice(index, 1);
-      });
+      if (confirm("Are you sure you want to delete your account?")) {
+        var index = this.post.offers.indexOf(offer);
+        axios.delete(`/api/offers/${offer.id}`).then((response) => {
+          console.log("Success", response.data);
+          this.$parent.flashMessage =
+            "Your offer has been successfully deleted";
+          this.post.offers.splice(index, 1);
+        });
+      }
     },
   },
 };
