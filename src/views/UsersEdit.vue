@@ -264,12 +264,16 @@ export default {
         });
     },
     destroyUser: function() {
-      axios.delete(`/api/users/${this.user.id}`).then((response) => {
-        console.log("Success", response.data);
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("user_id");
-        this.$router.push("/");
-      });
+      if (confirm("Are you sure you want to delete your account?")) {
+        axios.delete(`/api/users/${this.user.id}`).then((response) => {
+          console.log("Success", response.data);
+          localStorage.removeItem("jwt");
+          localStorage.removeItem("user_id");
+          this.$parent.flashMessage =
+            "Your account has been successfully deleted";
+          this.$router.push("/");
+        });
+      }
     },
   },
 };

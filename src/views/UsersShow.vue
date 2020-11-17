@@ -271,12 +271,6 @@ export default {
         this.user = response.data;
       });
     },
-    destroyUser: function() {
-      axios.delete(`/api/users/${this.user.id}`).then((response) => {
-        console.log("Success", response.data);
-        this.$router.push("/");
-      });
-    },
     updateOffer: function(offer) {
       var formData = new FormData();
       var index = this.user.offers.indexOf(offer);
@@ -294,13 +288,6 @@ export default {
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
-    },
-    destroyOffer: function(offer) {
-      var index = this.user.offers.indexOf(offer);
-      axios.delete(`/api/offers/${offer.id}`).then((response) => {
-        console.log("Success", response.data);
-        this.user.offers.splice(index, 1);
-      });
     },
     setSortAttribute: function(attribute) {
       this.sortAttribute = attribute;
