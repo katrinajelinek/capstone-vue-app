@@ -208,6 +208,7 @@ export default {
       tags: [],
       values: [],
       image: "",
+      flashMessage: "",
     };
   },
   created: function() {
@@ -250,10 +251,13 @@ export default {
         });
     },
     destroyPost: function() {
-      axios.delete(`/api/posts/${this.post.id}`).then((response) => {
-        console.log("Success", response.data);
-        this.$router.push("/");
-      });
+      if (confirm("Are you sure you want to delete your post?")) {
+        axios.delete(`/api/posts/${this.post.id}`).then((response) => {
+          console.log("Success", response.data);
+          this.$parent.flashMessage = "Your post has been successfully deleted";
+          this.$router.push("/");
+        });
+      }
     },
     indexTags: function() {
       axios.get("/api/tags").then((response) => {
