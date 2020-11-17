@@ -43,7 +43,7 @@
       <div class="container padding-top padding-bottom">
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1>Welcome to Clipsy</h1>
+            <h1><span>Welcome to</span> Clipsy</h1>
             <p>
               Where plant friends can trade clippings and seeds with their
               community
