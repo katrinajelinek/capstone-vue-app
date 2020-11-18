@@ -48,12 +48,12 @@
       <div class="container text-center our-team padding-bottom">
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1>My Offers</h1>
+            <h1>Offers on this Clipping</h1>
           </div>
         </div>
 
         <div id="content" class="site-content col-md-12">
-          <div class="col-md-4 col-sm-6">
+          <div class="col-md-4 col-sm-4">
             <div
               class="post"
               v-for="offer in orderBy(post.offers, 'created_at', -1)"
@@ -70,19 +70,16 @@
                 <div class="entry-meta">
                   <ul>
                     <li class="author">
-                      <i class="fa fa-user"></i><a href="#">Admin</a>
+                      <i class="fa fa-user"></i
+                      ><router-link :to="`/users/${post.user_id}`">
+                        {{ post.user.first_name }} {{ post.user.last_name }}
+                      </router-link>
                     </li>
                     <li class="publish-date">
                       <i class="fa fa-calendar"></i
                       ><a href="#"
                         >Created {{ relativeDate(offer.created_at) }}</a
                       >
-                    </li>
-                    <li class="tag">
-                      <i class="fa fa-tags"></i><a href="#">Business</a>
-                    </li>
-                    <li class="comments">
-                      <i class="fa fa-comments-o"></i><a href="#">9 Comments</a>
                     </li>
                   </ul>
                 </div>
