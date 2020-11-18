@@ -90,6 +90,81 @@
                   </p>
                 </div>
               </div>
+              <div v-if="$parent.getUserId() == offer.user_id">
+                <button
+                  class="btn btn-primary"
+                  v-on:click="offerEditAuthentication = offer.id"
+                >
+                  Edit Offer
+                </button>
+              </div>
+              <div id="our-team">
+                <!-- our-team -->
+                <div v-if="offerEditAuthentication === offer.id">
+                  <div
+                    class="container text-center our-team padding-top padding-bottom"
+                  >
+                    <div class="row section-title text-center">
+                      <div class="col-sm-8 col-sm-offset-2">
+                        <h1>Edit your clipping</h1>
+                      </div>
+                    </div>
+                    <ul>
+                      <li class="text-danger" v-for="error in errors">
+                        {{ error }}
+                      </li>
+                    </ul>
+                    <form
+                      v-on:submit.prevent="updateOffer(offer)"
+                      id="comment-form"
+                      class="row"
+                      name="comment-form"
+                      method="post"
+                    >
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <input
+                            name="message"
+                            id="message"
+                            required="required"
+                            class="form-control"
+                            rows="7"
+                            placeholder="Your Message"
+                            v-model="offer.message"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <input
+                            type="file"
+                            name="name"
+                            class="form-control"
+                            v-on:change="setFile($event)"
+                            ref="fileInput"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 form-group">
+                        <button
+                          type="submit"
+                          class="btn btn-primary pull-right"
+                        >
+                          Update Offer
+                        </button>
+                        <button
+                          class="btn btn-primary pull-right"
+                          v-on:click="destroyOffer(offer)"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <!-- #/ our-team -->
+              </div>
             </div>
             <!--/post-->
           </div>
