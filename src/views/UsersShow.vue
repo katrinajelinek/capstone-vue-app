@@ -90,12 +90,12 @@
             class="site-content col-md-8"
             v-for="post in orderBy(user.posts, 'created_at', -1)"
           >
-            <div class="post">
-              <div class="entry-header">
-                <div class="entry-thumbnail">
-                  <img class="img-responsive" :src="post.image_url" alt="" />
-                </div>
+            <div class="col-sm-6">
+              <div class="entry-thumbnail">
+                <img class="img-responsive" :src="post.image_url" alt="" />
               </div>
+            </div>
+            <div class="post">
               <div class="post-content">
                 <h2 class="entry-title">
                   <a href="blog-detail.html"

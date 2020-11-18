@@ -17,23 +17,23 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-12">
+          <div class="entry-thumbnail">
+            <div v-if="post.image_url">
+              <img class="img-responsive" :src="post.image_url" alt="" />
+            </div>
+            <div v-else>
+              <img
+                class="img-responsive"
+                src="/images/default-post-picture.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div id="content" class="full-width site-content col-md-12">
             <div class="post">
-              <div class="col-sm-12">
-                <div class="entry-thumbnail">
-                  <div v-if="post.image_url">
-                    <img class="img-responsive" :src="post.image_url" alt="" />
-                  </div>
-                  <div v-else>
-                    <img
-                      class="img-responsive"
-                      src="/images/default-post-picture.jpg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
               <div class="post-content">
                 <h2 class="entry-title">
                   <div v-if="$parent.getUserId() == post.user_id">
