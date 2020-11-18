@@ -5,12 +5,12 @@
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
             <h1>{{ post.plant_type }}</h1>
-            <h3>
+            <h4>
               Clipped by:
               <router-link :to="`/users/${post.user_id}`">
-                <p>{{ post.user.first_name }} {{ post.user.last_name }}</p>
+                {{ post.user.first_name }} {{ post.user.last_name }}
               </router-link>
-            </h3>
+            </h4>
             <div v-if="post.offer_accepted">
               <h5>An offer has been accepted</h5>
             </div>
@@ -28,13 +28,17 @@
             <img class="img-responsive" :src="post.image_url" alt="About" />
           </div>
           <div class="col-sm-6 npl">
-            <p>Trade for: {{ post.trade_for }}</p>
-            <p>Description: {{ post.description }}</p>
-            <p>Location: {{ post.location }}</p>
-            <p>Tags:</p>
+            <h5>Trade for: {{ post.trade_for }}</h5>
+            <br />
+            <h5>Description: {{ post.description }}</h5>
+            <br />
+            <h5>Location: {{ post.location }}</h5>
+            <br />
+            <h5>Tags:</h5>
             <div v-for="tag in post.tags">
-              <p>{{ tag.name }}</p>
+              <h6>{{ tag.name }}</h6>
             </div>
+            <br />
             <p>Created {{ relativeDate(post.created_at) }}</p>
             <div v-if="$parent.getUserId() == post.user_id">
               <router-link :to="`/posts/${post.id}/edit`">Edit</router-link>
