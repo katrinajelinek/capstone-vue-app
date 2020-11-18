@@ -1,5 +1,105 @@
 <template>
   <div id="sub-page" class="posts-show">
+    <div id="about">
+      <div class="container padding-top">
+        <div class="row section-title text-center">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h1>{{ post.plant_type }}</h1>
+            <h3>
+              Clipped by:
+              <router-link :to="`/users/${post.user_id}`">
+                <p>{{ post.user.first_name }} {{ post.user.last_name }}</p>
+              </router-link>
+            </h3>
+            <div v-if="post.offer_accepted">
+              <h5>An offer has been accepted</h5>
+            </div>
+            <div v-if="$parent.getUserId() == post.user_id">
+              <router-link
+                class="btn btn-primary"
+                :to="`/posts/${post.id}/edit`"
+                >Edit Your Clipping</router-link
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row padding-bottom">
+          <div class="col-sm-6">
+            <img class="img-responsive" :src="post.image_url" alt="About" />
+          </div>
+          <div class="col-sm-6 npl">
+            <p>Trade for: {{ post.trade_for }}</p>
+            <p>Description: {{ post.description }}</p>
+            <p>Location: {{ post.location }}</p>
+            <p>Tags:</p>
+            <div v-for="tag in post.tags">
+              <p>{{ tag.name }}</p>
+            </div>
+            <p>Created {{ relativeDate(post.created_at) }}</p>
+            <div v-if="$parent.getUserId() == post.user_id">
+              <router-link :to="`/posts/${post.id}/edit`">Edit</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="our-team">
+      <!-- our-team -->
+      <div class="container text-center our-team padding-bottom">
+        <div class="row section-title text-center">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h1>My Offers</h1>
+          </div>
+        </div>
+
+        <div id="content" class="site-content col-md-12">
+          <div class="col-md-4 col-sm-6">
+            <div
+              class="post"
+              v-for="offer in orderBy(post.offers, 'created_at', -1)"
+            >
+              <div class="entry-header">
+                <div class="entry-thumbnail">
+                  <img class="img-responsive" :src="offer.image_url" alt="" />
+                </div>
+              </div>
+              <div class="post-content">
+                <h2 class="entry-title">
+                  <a href="blog-detail.html">{{ offer.post_title }}</a>
+                </h2>
+                <div class="entry-meta">
+                  <ul>
+                    <li class="author">
+                      <i class="fa fa-user"></i><a href="#">Admin</a>
+                    </li>
+                    <li class="publish-date">
+                      <i class="fa fa-calendar"></i
+                      ><a href="#"
+                        >Created {{ relativeDate(offer.created_at) }}</a
+                      >
+                    </li>
+                    <li class="tag">
+                      <i class="fa fa-tags"></i><a href="#">Business</a>
+                    </li>
+                    <li class="comments">
+                      <i class="fa fa-comments-o"></i><a href="#">9 Comments</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="entry-summary">
+                  <p>
+                    {{ offer.message }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!--/post-->
+          </div>
+        </div>
+      </div>
+      <!-- #/ our-team -->
+    </div>
+
     <div id="main-blog">
       <div class="container padding-top">
         <div class="row section-title text-center">
