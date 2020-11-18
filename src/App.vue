@@ -6,21 +6,10 @@
           <div class="row header-section">
             <div class="col-sm-3">
               <div class="navbar-header">
-                <button
-                  type="button"
-                  class="navbar-toggle"
-                  data-toggle="collapse"
-                  data-target=".navbar-collapse"
-                >
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
                 <h1>
                   <img
                     class="img-responsive"
-                    src="/images/logo.png"
+                    src="/images/clipsy-logo.png"
                     alt="logo"
                   />
                 </h1>
@@ -49,9 +38,6 @@
                   </li>
                 </ul>
               </nav>
-              <div class="topbar-icons">
-                <span><i class="fa fa-search"></i></span>
-              </div>
             </div>
           </div>
         </div>
