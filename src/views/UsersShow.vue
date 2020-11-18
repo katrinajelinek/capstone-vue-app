@@ -62,7 +62,9 @@
               </div>
               <div class="post-content">
                 <h2 class="entry-title">
-                  <a href="blog-detail.html">{{ post.plant_type }}</a>
+                  <router-link :to="`/posts/${post.id}`">{{
+                    post.plant_type
+                  }}</router-link>
                 </h2>
                 <div class="entry-meta">
                   <ul>
