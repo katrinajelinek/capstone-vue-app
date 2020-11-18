@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <img class="img-responsive" :src="user.image_url" alt="About" />
           </div>
-          <div class="col-sm-6 npl">
+          <div class="col-sm-6">
             <h2>My Info</h2>
             <p>{{ user.first_name }} {{ user.last_name }}</p>
             <p><i class="fa fa-envelope"></i> {{ user.email }}</p>
@@ -41,11 +41,11 @@
         </div>
 
         <div id="content" class="site-content col-md-8">
-          <div class="col-sm-6">
-            <div
-              class="post"
-              v-for="post in orderBy(user.posts, 'created_at', -1)"
-            >
+          <div
+            class="col-sm-6"
+            v-for="post in orderBy(user.posts, 'created_at', -1)"
+          >
+            <div class="post">
               <div class="entry-header">
                 <div class="entry-thumbnail">
                   <img class="img-responsive" :src="post.image_url" alt="" />
@@ -94,11 +94,11 @@
         </div>
 
         <div id="content" class="site-content col-md-12">
-          <div class="col-md-4 col-sm-6">
-            <div
-              class="post"
-              v-for="offer in orderBy(user.offers, 'created_at', -1)"
-            >
+          <div
+            class="col-md-4 col-sm-6"
+            v-for="offer in orderBy(user.offers, 'created_at', -1)"
+          >
+            <div class="post">
               <div class="entry-header">
                 <div class="entry-thumbnail">
                   <img class="img-responsive" :src="offer.image_url" alt="" />

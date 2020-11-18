@@ -1,17 +1,5 @@
 <template>
   <div class="posts-index">
-    <!-- search -->
-    <!-- <input
-      type="text"
-      v-model="plantTypeFilter"
-      placeholder="Search by Clipping"
-      list="plantTypes"
-    />
-    <br />
-    <datalist id="plantTypes">
-      <option v-for="post in posts">{{ post.plant_type }}</option>
-    </datalist> -->
-
     <!-- filter by tags multiselect -->
     <div class="col-sm-8 col-sm-offset-2">
       <div>

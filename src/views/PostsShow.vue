@@ -52,13 +52,12 @@
             <h1>Offers on this Clipping</h1>
           </div>
         </div>
-
         <div id="content" class="site-content col-md-12">
-          <div class="col-md-4 col-sm-4">
-            <div
-              class="post"
-              v-for="offer in orderBy(post.offers, 'created_at', -1)"
-            >
+          <div
+            class="col-md-4 col-sm-4"
+            v-for="offer in orderBy(post.offers, 'created_at', -1)"
+          >
+            <div class="post">
               <div class="entry-header">
                 <div class="entry-thumbnail">
                   <img class="img-responsive" :src="offer.image_url" alt="" />
@@ -98,77 +97,75 @@
                   Edit Offer
                 </button>
               </div>
-              <div id="our-team">
-                <!-- our-team -->
-                <div v-if="offerEditAuthentication === offer.id">
-                  <div
-                    class="container text-center our-team padding-top padding-bottom"
+            </div>
+            <div id="our-team">
+              <!-- our-team -->
+              <div v-if="offerEditAuthentication === offer.id">
+                <div
+                  class="container text-center our-team padding-top padding-bottom"
+                >
+                  <div class="row section-title text-center">
+                    <div class="col-sm-8 col-sm-offset-2">
+                      <h1>Edit your clipping</h1>
+                    </div>
+                  </div>
+                  <ul>
+                    <li class="text-danger" v-for="error in errors">
+                      {{ error }}
+                    </li>
+                  </ul>
+                  <form
+                    v-on:submit.prevent="updateOffer(offer)"
+                    id="comment-form"
+                    class="row"
+                    name="comment-form"
+                    method="post"
                   >
-                    <div class="row section-title text-center">
-                      <div class="col-sm-8 col-sm-offset-2">
-                        <h1>Edit your clipping</h1>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <input
+                          name="message"
+                          id="message"
+                          required="required"
+                          class="form-control"
+                          rows="7"
+                          placeholder="Your Message"
+                          v-model="offer.message"
+                        />
                       </div>
                     </div>
-                    <ul>
-                      <li class="text-danger" v-for="error in errors">
-                        {{ error }}
-                      </li>
-                    </ul>
-                    <form
-                      v-on:submit.prevent="updateOffer(offer)"
-                      id="comment-form"
-                      class="row"
-                      name="comment-form"
-                      method="post"
-                    >
-                      <div class="col-sm-12">
-                        <div class="form-group">
-                          <input
-                            name="message"
-                            id="message"
-                            required="required"
-                            class="form-control"
-                            rows="7"
-                            placeholder="Your Message"
-                            v-model="offer.message"
-                          />
-                        </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <input
+                          type="file"
+                          name="name"
+                          class="form-control"
+                          v-on:change="setFile($event)"
+                          ref="fileInput"
+                        />
                       </div>
-                      <div class="col-sm-12">
-                        <div class="form-group">
-                          <input
-                            type="file"
-                            name="name"
-                            class="form-control"
-                            v-on:change="setFile($event)"
-                            ref="fileInput"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-sm-12 form-group">
-                        <button
-                          type="submit"
-                          class="btn btn-primary pull-right"
-                        >
-                          Update Offer
-                        </button>
-                        <button
-                          class="btn btn-primary pull-right"
-                          v-on:click="destroyOffer(offer)"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                      <button type="submit" class="btn btn-primary pull-right">
+                        Update Offer
+                      </button>
+                      <button
+                        class="btn btn-primary pull-right"
+                        v-on:click="destroyOffer(offer)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </form>
                 </div>
-
-                <!-- #/ our-team -->
               </div>
+
+              <!-- #/ our-team -->
             </div>
             <!--/post-->
           </div>
         </div>
+
         <!--/offers-area-->
         <div id="our-team">
           <!-- our-team -->
