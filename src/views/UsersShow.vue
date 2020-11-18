@@ -9,6 +9,150 @@
       <router-link to="/posts/new">Post a clipping</router-link>
     </div> -->
 
+    <!-- About -->
+    <div id="about">
+      <div class="container padding-top">
+        <div class="row section-title text-center">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h1>My Profile</h1>
+          </div>
+        </div>
+        <div class="row padding-bottom">
+          <div class="col-sm-6">
+            <img class="img-responsive" :src="user.image_url" alt="About" />
+          </div>
+          <div class="col-sm-6 npl">
+            <h2>My Info</h2>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p><i class="fa fa-envelope"></i> {{ user.email }}</p>
+            <div v-if="$parent.getUserId() == user.id">
+              <router-link
+                class="btn btn-primary"
+                :to="`/users/${user.id}/edit`"
+                >Edit Profile</router-link
+              >
+
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #/ About -->
+
+    <div id="our-team">
+      <!-- our-team -->
+      <div class="container text-center our-team padding-top padding-bottom">
+        <div class="row section-title text-center">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h1>My Clippings</h1>
+          </div>
+        </div>
+
+        <div id="content" class="site-content col-md-12">
+          <div class="col-sm-6">
+            <div
+              class="post"
+              v-for="post in orderBy(user.posts, 'created_at', -1)"
+            >
+              <div class="entry-header">
+                <div class="entry-thumbnail">
+                  <img class="img-responsive" :src="post.image_url" alt="" />
+                </div>
+              </div>
+              <div class="post-content">
+                <h2 class="entry-title">
+                  <a href="blog-detail.html">{{ post.plant_type }}</a>
+                </h2>
+                <div class="entry-meta">
+                  <ul>
+                    <li class="author">
+                      <i class="fa fa-user"></i><a href="#">Admin</a>
+                    </li>
+                    <li class="publish-date">
+                      <i class="fa fa-calendar"></i
+                      ><a href="#"
+                        >Created {{ relativeDate(post.created_at) }}</a
+                      >
+                    </li>
+                    <li class="tag">
+                      <i class="fa fa-tags"></i><a href="#">Business</a>
+                    </li>
+                    <li class="comments">
+                      <i class="fa fa-comments-o"></i><a href="#">9 Comments</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="entry-summary">
+                  <p>
+                    {{ post.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!--/post-->
+          </div>
+        </div>
+      </div>
+      <!-- #/ our-team -->
+    </div>
+    <div id="our-team">
+      <!-- our-team -->
+      <div class="container text-center our-team padding-bottom">
+        <div class="row section-title text-center">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h1>My Offers</h1>
+          </div>
+        </div>
+
+        <div id="content" class="site-content col-md-12">
+          <div class="col-md-4 col-sm-6">
+            <div
+              class="post"
+              v-for="offer in orderBy(user.offers, 'created_at', -1)"
+            >
+              <div class="entry-header">
+                <div class="entry-thumbnail">
+                  <img class="img-responsive" :src="offer.image_url" alt="" />
+                </div>
+              </div>
+              <div class="post-content">
+                <h2 class="entry-title">
+                  <a href="blog-detail.html">{{ offer.post_title }}</a>
+                </h2>
+                <div class="entry-meta">
+                  <ul>
+                    <li class="author">
+                      <i class="fa fa-user"></i><a href="#">Admin</a>
+                    </li>
+                    <li class="publish-date">
+                      <i class="fa fa-calendar"></i
+                      ><a href="#"
+                        >Created {{ relativeDate(offer.created_at) }}</a
+                      >
+                    </li>
+                    <li class="tag">
+                      <i class="fa fa-tags"></i><a href="#">Business</a>
+                    </li>
+                    <li class="comments">
+                      <i class="fa fa-comments-o"></i><a href="#">9 Comments</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="entry-summary">
+                  <p>
+                    {{ offer.message }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!--/post-->
+          </div>
+        </div>
+      </div>
+      <!-- #/ our-team -->
+    </div>
+
     <!-- posts index -->
     <div id="main-blog">
       <div class="container padding-top">

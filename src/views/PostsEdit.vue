@@ -1,125 +1,125 @@
 <template>
   <div class="posts-edit">
     <div class="users-edit">
-      <div class="replay-box">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="container">
-              <h3>Edit your clipping</h3>
-              <ul>
-                <li class="text-danger" v-for="error in errors">{{ error }}</li>
-              </ul>
-              <form
-                id="comment-form"
-                class="row"
-                name="comment-form"
-                method="post"
-                v-on:submit.prevent="createPost()"
-              >
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      required="required"
-                      placeholder="Plant Type"
-                      v-model="post.plant_type"
-                    />
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      required="required"
-                      placeholder="Trade for"
-                      v-model="post.trade_for"
-                    />
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      required="required"
-                      placeholder="Description"
-                      v-model="post.description"
-                    />
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      required="required"
-                      placeholder="Your location"
-                      v-model="post.location"
-                    />
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <div>
-                      <multiselect
-                        v-model="values"
-                        :options="tags"
-                        :multiple="true"
-                        :close-on-select="false"
-                        :clear-on-select="false"
-                        :preserve-search="true"
-                        placeholder="Tags"
-                        label="name"
-                        track-by="name"
-                        :preselect-first="true"
-                      >
-                        <template
-                          slot="selection"
-                          slot-scope="{ values, isOpen }"
-                          ><span
-                            class="multiselect__single"
-                            v-if="values.length &amp;&amp; !isOpen"
-                            >{{ values.length }} tags selected</span
-                          ></template
-                        >
-                      </multiselect>
-                      <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input
-                      type="file"
-                      name="name"
-                      class="form-control"
-                      required="required"
-                      v-on:change="setFile($event)"
-                      ref="fileInput"
-                    />
-                  </div>
-                </div>
-                <div class="col-sm-12 form-group">
-                  <button type="submit" class="btn btn-primary pull-right">
-                    Edit
-                  </button>
-                  <button
-                    class="btn btn-primary pull-right"
-                    v-on:click="destroyPost()"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </form>
+      <div id="our-team">
+        <!-- our-team -->
+        <div class="container text-center our-team padding-top padding-bottom">
+          <div class="row section-title text-center">
+            <div class="col-sm-8 col-sm-offset-2">
+              <h1>Edit your clipping</h1>
             </div>
           </div>
+          <ul>
+            <li class="text-danger" v-for="error in errors">{{ error }}</li>
+          </ul>
+          <form
+            id="comment-form"
+            class="row"
+            name="comment-form"
+            method="post"
+            v-on:submit.prevent="createPost()"
+          >
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  required="required"
+                  placeholder="Plant Type"
+                  v-model="post.plant_type"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  required="required"
+                  placeholder="Trade for"
+                  v-model="post.trade_for"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  required="required"
+                  placeholder="Description"
+                  v-model="post.description"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  required="required"
+                  placeholder="Your location"
+                  v-model="post.location"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div>
+                  <multiselect
+                    v-model="values"
+                    :options="tags"
+                    :multiple="true"
+                    :close-on-select="false"
+                    :clear-on-select="false"
+                    :preserve-search="true"
+                    placeholder="Tags"
+                    label="name"
+                    track-by="name"
+                    :preselect-first="true"
+                  >
+                    <template slot="selection" slot-scope="{ values, isOpen }"
+                      ><span
+                        class="multiselect__single"
+                        v-if="values.length &amp;&amp; !isOpen"
+                        >{{ values.length }} tags selected</span
+                      ></template
+                    >
+                  </multiselect>
+                  <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input
+                  type="file"
+                  name="name"
+                  class="form-control"
+                  required="required"
+                  v-on:change="setFile($event)"
+                  ref="fileInput"
+                />
+              </div>
+            </div>
+            <div class="col-sm-12 form-group">
+              <button type="submit" class="btn btn-primary pull-right">
+                Edit
+              </button>
+              <button
+                class="btn btn-primary pull-right"
+                v-on:click="destroyPost()"
+              >
+                Delete
+              </button>
+            </div>
+          </form>
         </div>
+        <!-- #/ our-team -->
       </div>
     </div>
 
@@ -186,7 +186,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 .contact-wrap .btn.btn-primary,
 #comment-form .btn.btn-primary {
   margin-left: 15px;
