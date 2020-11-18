@@ -1,14 +1,5 @@
 <template>
   <div id="sub-page" class="users-show">
-    <!-- <img :src="user.image_url" alt="" class="image-fit" />
-    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-    <div v-if="$parent.getUserId() == user.id">
-      <router-link :to="`/users/${user.id}/edit`">Edit Profile</router-link>
-    </div>
-    <div v-if="$parent.getUserId() == user.id">
-      <router-link to="/posts/new">Post a clipping</router-link>
-    </div> -->
-
     <!-- About -->
     <div id="about">
       <div class="container padding-top">
