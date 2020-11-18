@@ -75,27 +75,24 @@
                   </div>
                   <div class="overlay">
                     <div class="overlay-content">
-                      <!-- <span
-                        ><a href="portfolio-details.html"
-                          ><i class="fa fa-arrow-circle-o-right"></i></a
-                      ></span> -->
-                      <span
-                        ><router-link :to="`/posts/${post.id}`">
-                          <h2>{{ post.plant_type }}</h2>
+                      <router-link :to="`/posts/${post.id}`">
+                        <h2>{{ post.plant_type }}</h2>
+                      </router-link>
+                      <h4>
+                        Clipped by:
+                        <router-link :to="`/users/${post.user_id}`">
+                          {{ post.user.first_name }} {{ post.user.last_name }}
                         </router-link>
-                        <h3>Clipped by:</h3>
-                        <p>
-                          <router-link :to="`/users/${post.user_id}`">
-                            {{ post.user.first_name }} {{ post.user.last_name }}
-                          </router-link>
-                        </p>
-                        <p>Location: {{ post.location }}</p>
-                        <p>Tags:</p>
-                        <div v-for="tag in post.tags">
-                          {{ tag.name }}
-                        </div>
-                        <p>Created {{ relativeDate(post.created_at) }}</p>
-                      </span>
+                      </h4>
+                      <br />
+                      <h5>Location: {{ post.location }}</h5>
+                      <br />
+                      <i class="fa fa-tags"></i>
+                      <p v-for="tag in post.tags">{{ tag.name }},</p>
+                      <br />
+                      <p class="fa fa-calendar">
+                        Created {{ relativeDate(post.created_at) }}
+                      </p>
                     </div>
                   </div>
                 </div>
