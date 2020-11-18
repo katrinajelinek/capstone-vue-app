@@ -19,7 +19,7 @@
             method="post"
             v-on:submit.prevent="createPost()"
           >
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <input
                   type="text"
@@ -31,7 +31,7 @@
                 />
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <input
                   type="text"
@@ -43,7 +43,7 @@
                 />
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <input
                   type="text"
@@ -55,7 +55,7 @@
                 />
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <input
                   type="text"
@@ -67,7 +67,7 @@
                 />
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <div>
                   <multiselect
@@ -94,7 +94,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <input
                   type="file"

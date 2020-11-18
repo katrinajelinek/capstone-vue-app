@@ -18,7 +18,7 @@
           method="post"
           v-on:submit.prevent="updateUser()"
         >
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="text"
@@ -30,7 +30,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="text"
@@ -42,7 +42,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="email"
@@ -54,7 +54,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="file"
@@ -66,7 +66,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="password"
@@ -105,7 +105,7 @@
           method="post"
           v-on:submit.prevent="updateUser()"
         >
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="password"
@@ -117,7 +117,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="password"
@@ -129,7 +129,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="password"
