@@ -21,7 +21,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <input
-                type="emil"
+                type="email"
                 name="name"
                 class="form-control"
                 required="required"

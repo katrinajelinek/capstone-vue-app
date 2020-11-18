@@ -115,9 +115,9 @@
               name="comment-form"
               method="post"
             >
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <div class="form-group">
-                  <textarea
+                  <input
                     name="message"
                     id="message"
                     required="required"
@@ -125,10 +125,10 @@
                     rows="7"
                     placeholder="Your Message"
                     v-model="message"
-                  ></textarea>
+                  />
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-12">
                 <div class="form-group">
                   <input
                     type="file"
