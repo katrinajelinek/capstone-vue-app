@@ -149,7 +149,6 @@ export default {
       tags: [],
       tagsFilter: [],
       plantTypeFilter: "",
-      default: "/public/images/default-post-picture.jpg",
     };
   },
   created: function() {
