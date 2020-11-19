@@ -17,7 +17,7 @@
             class="row"
             name="comment-form"
             method="post"
-            v-on:submit.prevent="createPost()"
+            v-on:submit.prevent="updatePost(post)"
           >
             <div class="col-sm-12">
               <div class="form-group">
