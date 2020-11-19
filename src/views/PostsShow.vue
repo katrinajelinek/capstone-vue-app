@@ -58,6 +58,9 @@
             v-for="offer in orderBy(post.offers, 'created_at', -1)"
           >
             <div class="post">
+              <div v-if="offer.accepted === true">
+                <h4>Accepted</h4>
+              </div>
               <div class="entry-header">
                 <div class="entry-thumbnail">
                   <img class="img-responsive" :src="offer.image_url" alt="" />
@@ -71,8 +74,8 @@
                   <ul>
                     <li class="author">
                       <i class="fa fa-user"></i
-                      ><router-link :to="`/users/${post.user_id}`">
-                        {{ post.user.first_name }} {{ post.user.last_name }}
+                      ><router-link :to="`/users/${offer.user_id}`">
+                        {{ offer.user.first_name }} {{ offer.user.last_name }}
                       </router-link>
                     </li>
                     <li class="publish-date">
@@ -86,6 +89,23 @@
                 <div class="entry-summary">
                   <p>
                     {{ offer.message }}
+                  </p>
+                </div>
+              </div>
+              <div v-if="$parent.getUserId() == post.user_id">
+                <div v-if="!post.offer_accepted">
+                  <button
+                    v-on:click="updateOfferAccept(offer)"
+                    class="btn btn-primary"
+                  >
+                    Accept Offer
+                  </button>
+                </div>
+                <div v-if="offer.accepted === true">
+                  <p>
+                    {{ offer.user.first_name }}
+                    {{ offer.user.last_name }}'s email:
+                    {{ offer.user.email }}
                   </p>
                 </div>
               </div>
