@@ -14,7 +14,9 @@
             <h4>
               Clipped by:
               <router-link :to="`/users/${post.user_id}`">
-                {{ post.user.first_name }} {{ post.user.last_name }}
+                <strong
+                  >{{ post.user.first_name }} {{ post.user.last_name }}</strong
+                >
               </router-link>
             </h4>
             <div v-if="$parent.getUserId() == post.user_id">
@@ -31,13 +33,13 @@
             <img class="img-responsive" :src="post.image_url" alt="About" />
           </div>
           <div class="col-sm-6 npl">
-            <h5>Trade for: {{ post.trade_for }}</h5>
+            <h5><strong>Trade for:</strong> {{ post.trade_for }}</h5>
             <br />
-            <h5>Description: {{ post.description }}</h5>
+            <h5><strong>Description:</strong> {{ post.description }}</h5>
             <br />
-            <h5>Location: {{ post.location }}</h5>
+            <h5><strong>Location:</strong> {{ post.location }}</h5>
             <br />
-            <h5>Tags:</h5>
+            <h5><strong>Tags:</strong></h5>
             <div v-for="tag in post.tags">
               <h6>{{ tag.name }}</h6>
             </div>
@@ -58,7 +60,7 @@
         <div id="content" class="site-content col-md-12">
           <div
             class="col-md-4 col-sm-4"
-            v-for="offer in orderBy(post.offers, 'created_at', -1)"
+            v-for="offer in orderBy(post.offers, 'created_at')"
           >
             <div class="post">
               <div v-if="offer.accepted === true">

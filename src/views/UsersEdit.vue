@@ -79,7 +79,7 @@
           </div>
           <div class="col-sm-12 form-group">
             <button type="submit" class="btn btn-primary pull-right">
-              Edit
+              Update
             </button>
             <button
               v-on:click="destroyUser(user)"
