@@ -4,16 +4,19 @@
       <div class="container padding-top">
         <div class="row section-title text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h1>{{ post.plant_type }}</h1>
+            <h1>
+              {{ post.plant_type }}
+              <div v-if="post.offer_accepted">
+                <h5>An offer has been accepted</h5>
+              </div>
+            </h1>
+
             <h4>
               Clipped by:
               <router-link :to="`/users/${post.user_id}`">
                 {{ post.user.first_name }} {{ post.user.last_name }}
               </router-link>
             </h4>
-            <div v-if="post.offer_accepted">
-              <h5>An offer has been accepted</h5>
-            </div>
             <div v-if="$parent.getUserId() == post.user_id">
               <router-link
                 class="btn btn-primary"
@@ -102,11 +105,11 @@
                   </button>
                 </div>
                 <div v-if="offer.accepted === true">
-                  <p>
+                  <h5>
                     {{ offer.user.first_name }}
                     {{ offer.user.last_name }}'s email:
                     {{ offer.user.email }}
-                  </p>
+                  </h5>
                 </div>
               </div>
               <div v-if="$parent.getUserId() == offer.user_id">

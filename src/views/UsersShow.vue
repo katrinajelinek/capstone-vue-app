@@ -13,9 +13,8 @@
             <img class="img-responsive" :src="user.image_url" alt="About" />
           </div>
           <div class="col-sm-6">
-            <h2>My Info</h2>
-            <p>{{ user.first_name }} {{ user.last_name }}</p>
-            <p><i class="fa fa-envelope"></i> {{ user.email }}</p>
+            <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+            <!-- <p><i class="fa fa-envelope"></i> {{ user.email }}</p> -->
             <div v-if="$parent.getUserId() == user.id">
               <router-link
                 class="btn btn-primary"
