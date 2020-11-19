@@ -51,6 +51,9 @@
                   <img class="img-responsive" :src="post.image_url" alt="" />
                 </div>
               </div>
+              <div v-if="post.offer_accepted">
+                <h4>An offer has been accepted</h4>
+              </div>
               <div class="post-content">
                 <h2 class="entry-title">
                   <router-link :to="`/posts/${post.id}`">{{
