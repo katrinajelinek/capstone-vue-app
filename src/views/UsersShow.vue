@@ -39,9 +39,9 @@
           </div>
         </div>
 
-        <div id="content" class="site-content col-md-8">
+        <div id="content" class="site-content col-md-12">
           <div
-            class="col-sm-6"
+            class="col-md-4 col-sm-6"
             v-for="post in orderBy(user.posts, 'created_at', -1)"
           >
             <div class="post">
@@ -108,7 +108,9 @@
               </div>
               <div class="post-content">
                 <h2 class="entry-title">
-                  <a href="blog-detail.html">{{ offer.post_title }}</a>
+                  <router-link :to="`/posts/${offer.post_id}`">
+                    {{ offer.post_title }}</router-link
+                  >
                 </h2>
                 <div class="entry-meta">
                   <ul>

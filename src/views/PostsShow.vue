@@ -128,8 +128,8 @@
                   class="container text-center our-team padding-top padding-bottom"
                 >
                   <div class="row section-title text-center">
-                    <div class="col-sm-8 col-sm-offset-2">
-                      <h1>Edit your clipping</h1>
+                    <div class="col-sm-6 pull-left">
+                      <h5>Edit your clipping</h5>
                     </div>
                   </div>
                   <ul>
@@ -144,7 +144,7 @@
                     name="comment-form"
                     method="post"
                   >
-                    <div class="col-sm-12">
+                    <div class="col-sm-2">
                       <div class="form-group">
                         <input
                           name="message"
@@ -157,7 +157,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-2">
                       <div class="form-group">
                         <input
                           type="file"
@@ -168,7 +168,7 @@
                         />
                       </div>
                     </div>
-                    <div class="col-sm-12 form-group">
+                    <div class="col-sm-2 form-group">
                       <button type="submit" class="btn btn-primary pull-right">
                         Update Offer
                       </button>

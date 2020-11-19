@@ -18,7 +18,7 @@
           method="post"
           v-on:submit.prevent="createPost()"
         >
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="text"
@@ -30,7 +30,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="text"
@@ -42,7 +42,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="text"
@@ -54,7 +54,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="text"
@@ -66,7 +66,7 @@
               />
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <div>
                 <multiselect
@@ -93,7 +93,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <input
                 type="file"
@@ -114,64 +114,6 @@
       </div>
       <!-- #/ our-team -->
     </div>
-
-    <!-- <form v-on:submit.prevent="createPost()">
-      <h1>New Clipping</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <div class="form-group">
-        <label>Plant type:</label>
-        <input type="text" class="form-control" v-model="plantType" />
-      </div>
-      <div class="form-group">
-        <label>Trade for:</label>
-        <input type="text" class="form-control" v-model="tradeFor" />
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <input type="text" class="form-control" v-model="description" />
-      </div>
-      <div class="form-group">
-        <label>Location:</label>
-        <input type="text" class="form-control" v-model="location" />
-      </div>
-      <div class="form-group">
-        <label>Image:</label>
-        <input
-          type="file"
-          class="form-control"
-          v-on:change="setFile($event)"
-          ref="fileInput"
-        />
-      </div>
-      <input type="submit" class="btn btn-primary" value="Submit" />
-    </form> -->
-
-    <!-- tag multiselect -->
-    <!-- <div>
-      <label class="typo__label">Select Tags</label>
-      <multiselect
-        v-model="values"
-        :options="tags"
-        :multiple="true"
-        :close-on-select="false"
-        :clear-on-select="false"
-        :preserve-search="true"
-        placeholder="Pick some"
-        label="name"
-        track-by="name"
-        :preselect-first="true"
-      >
-        <template slot="selection" slot-scope="{ values, isOpen }"
-          ><span
-            class="multiselect__single"
-            v-if="values.length &amp;&amp; !isOpen"
-            >{{ values.length }} tags selected</span
-          ></template
-        >
-      </multiselect>
-    </div> -->
   </div>
 </template>
 
