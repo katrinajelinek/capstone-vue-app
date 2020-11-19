@@ -16,7 +16,7 @@
           class="row"
           name="comment-form"
           method="post"
-          v-on:submit.prevent="updateUser()"
+          v-on:submit.prevent="updateUser(user)"
         >
           <div class="col-sm-12">
             <div class="form-group">
@@ -82,7 +82,7 @@
               Edit
             </button>
             <button
-              v-on:click="destroyUser()"
+              v-on:click="destroyUser(user)"
               type="submit"
               class="btn btn-primary pull-right"
             >
@@ -151,64 +151,6 @@
       <!-- #/ our-team -->
     </div>
   </div>
-
-  <!-- <form v-on:submit.prevent="updateUser(user)">
-      <h1>Edit Clipping</h1>
-      <ul>
-        <li class="text-danger" v-for="error in errors">{{ error }}</li>
-      </ul>
-      <div class="form-group">
-        <label>First Name:</label>
-        <input type="text" class="form-control" v-model="user.first_name" />
-      </div>
-      <div class="form-group">
-        <label>Last Name:</label>
-        <input type="text" class="form-control" v-model="user.last_name" />
-      </div>
-      <div class="form-group">
-        <label>Email:</label>
-        <input type="text" class="form-control" v-model="user.email" />
-      </div>
-      <div class="form-group">
-        <label>Image:</label>
-        <input
-          type="file"
-          class="form-control"
-          v-on:change="setFile($event)"
-          ref="fileInput"
-        />
-      </div> -->
-  <!-- <div class="form-group">
-        <label>To change password, please enter your password:</label> 
-        <input type="password" class="form-control" v-model="user.password">
-      </div> -->
-  <!-- <input type="submit" class="btn btn-primary" value="Update" />
-    </form>
-    <button v-on:click="passwordUpdateToggle = !passwordUpdateToggle">
-      Update Password
-    </button> -->
-  <!-- <div v-if="passwordUpdateToggle === true">
-      <div class="form-group">
-        <label>Old Password</label>
-        <input type="password" class="form-control" v-model="old_password" />
-      </div>
-      <div class="form-group">
-        <label>New Password</label>
-        <input type="password" class="form-control" v-model="password" />
-      </div>
-      <div class="form-group">
-        <label>Password Confirmation</label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="password_confirmation"
-        />
-      </div>
-    </div>
-    <button v-on:click="destroyUser()">
-      Delete
-    </button>
-  </div> -->
 </template>
 
 <style scoped>
@@ -265,7 +207,7 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
-    destroyUser: function() {
+    destroyUser: function(user) {
       if (confirm("Are you sure you want to delete your account?")) {
         axios.delete(`/api/users/${this.user.id}`).then((response) => {
           console.log("Success", response.data);
